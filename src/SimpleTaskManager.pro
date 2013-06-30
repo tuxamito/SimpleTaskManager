@@ -13,11 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainscreen.cpp
+        mainscreen.cpp \
+    simpletask.cpp \
+    simpletasklistwidget.cpp
 
-HEADERS  += mainscreen.h
+HEADERS  += mainscreen.h \
+    simpletask.h \
+    simpletasklistwidget.h
 
-FORMS    += mainscreen.ui
+FORMS    += mainscreen.ui \
+    simpletasklistwidget.ui
 
 CONFIG += mobility
 MOBILITY = 

@@ -15,6 +15,10 @@ public:
     explicit mainScreen(QWidget *parent = 0);
     ~mainScreen();
     
+private slots:
+    void showOptions();
+    void addTask();
+
 private:
     Ui::mainScreen *ui;
 };

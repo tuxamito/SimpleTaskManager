@@ -12,3 +12,13 @@ mainScreen::~mainScreen()
 {
     delete ui;
 }
+
+void mainScreen::showOptions()
+{
+
+}
+
+void mainScreen::addTask()
+{
+
+}
