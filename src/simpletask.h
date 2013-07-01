@@ -20,9 +20,20 @@ public:
     void setName(string name);
     string name();
 
+    void setDescription(string description);
+    string description();
+
+    void setDone(bool done);
+    bool done();
+
 private:
     unsigned int _id;
     string _name;
+
+    bool _done;
+
+    string _description;
+
     //_dateCreation;
     //_dateModify;
 

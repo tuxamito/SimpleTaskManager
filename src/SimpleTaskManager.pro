@@ -27,3 +27,6 @@ FORMS    += mainscreen.ui \
 CONFIG += mobility
 MOBILITY = 
 
+RESOURCES += \
+    icons.qrc
+

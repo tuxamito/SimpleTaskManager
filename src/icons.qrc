@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="arrow-down">icons/48/arrow-down.png</file>
+        <file alias="arrow-up">icons/48/arrow-up.png</file>
+        <file>icons/48/configuration.png</file>
+    </qresource>
+</RCC>

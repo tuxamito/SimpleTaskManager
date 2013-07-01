@@ -34,3 +34,23 @@ string simpleTask::name()
 {
     return _name;
 }
+
+void simpleTask::setDescription(string description)
+{
+    _description = description;
+}
+
+string simpleTask::description()
+{
+    return _description;
+}
+
+void simpleTask::setDone(bool done)
+{
+    _done = done;
+}
+
+bool simpleTask::done()
+{
+    return _done;
+}

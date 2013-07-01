@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "simpletasklistwidget.h"
+
 namespace Ui {
 class mainScreen;
 }
