@@ -54,3 +54,23 @@ bool simpleTask::done()
 {
     return _done;
 }
+
+void simpleTask::setTimeCreation(time_t timeCreation)
+{
+    _timeCreation = timeCreation;
+}
+
+time_t simpleTask::timeCreation()
+{
+    return _timeCreation;
+}
+
+void simpleTask::setTimeDone(time_t timeDone)
+{
+    _timeDone = timeDone;
+}
+
+time_t simpleTask::timeDone()
+{
+    return _timeDone;
+}

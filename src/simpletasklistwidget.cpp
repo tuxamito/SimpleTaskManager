@@ -10,6 +10,11 @@ simpleTaskListWidget::simpleTaskListWidget(QWidget *parent) :
 
     ui->setupUi(this);
 
+    int size = ui->label->height() -4;
+    QString style("QCheckBox::indicator { width: " + QString::number(size) + "px; height: " + QString::number(size) + "px; }");
+
+    ui->checkDone->setStyleSheet(style);
+
     this->redraw();
 }
 
@@ -28,9 +33,14 @@ void simpleTaskListWidget::redraw()
     if(_task)
     {
         ui->label->setText(QString::fromUtf8(_task->name().c_str()));
-
         ui->checkDone->setChecked(_task->done());
     }
+    else
+    {
+        ui->label->setText("");
+        ui->checkDone->setChecked(false);
+    }
+
 }
 
 void simpleTaskListWidget::setTask(simpleTask *task)

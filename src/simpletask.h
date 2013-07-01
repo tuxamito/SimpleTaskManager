@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 
@@ -26,6 +27,12 @@ public:
     void setDone(bool done);
     bool done();
 
+    void setTimeCreation(time_t timeCreation);
+    time_t timeCreation();
+
+    void setTimeDone(time_t timeDone);
+    time_t timeDone();
+
 private:
     unsigned int _id;
     string _name;
@@ -34,8 +41,8 @@ private:
 
     string _description;
 
-    //_dateCreation;
-    //_dateModify;
+    time_t _timeCreation;
+    time_t _timeDone;
 
     vector<class simpleTask> _subTasks;
 };

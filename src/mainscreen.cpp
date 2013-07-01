@@ -10,12 +10,18 @@ mainScreen::mainScreen(QWidget *parent) :
     ui->setupUi(this);
 
     QListWidgetItem *nw = new QListWidgetItem;
-    //nw->setText("aaa");
     simpleTaskListWidget *nt = new simpleTaskListWidget;
 
-
-    ui->listTasks->insertItem(1, nw);
+    ui->listTasks->insertItem(0, nw);
     ui->listTasks->setItemWidget(nw, nt);
+
+
+    simpleTask *aaa = new simpleTask;
+
+    aaa->setName("MyName");
+
+
+    nt->setTask(aaa);
 }
 
 mainScreen::~mainScreen()
