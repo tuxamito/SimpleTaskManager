@@ -10,10 +10,11 @@ simpleTaskListWidget::simpleTaskListWidget(QWidget *parent) :
 
     ui->setupUi(this);
 
-    int size = ui->label->height() -4;
+#ifdef ANDROID
+    int size = ui->label->height() - 4;
     QString style("QCheckBox::indicator { width: " + QString::number(size) + "px; height: " + QString::number(size) + "px; }");
-
     ui->checkDone->setStyleSheet(style);
+#endif
 
     this->redraw();
 }
@@ -46,7 +47,6 @@ void simpleTaskListWidget::redraw()
 void simpleTaskListWidget::setTask(simpleTask *task)
 {
     _task = task;
-
     this->redraw();
 }
 

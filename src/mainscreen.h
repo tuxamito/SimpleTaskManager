@@ -20,6 +20,7 @@ public:
 private slots:
     void showOptions();
     void addTask();
+    void createTask(QString);
 
 private:
     Ui::mainScreen *ui;

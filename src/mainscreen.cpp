@@ -2,26 +2,15 @@
 #include "ui_mainscreen.h"
 
 #include <QListWidgetItem>
+#include <QDebug>
+
+#include "addtaskdialog.h"
 
 mainScreen::mainScreen(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainScreen)
 {
     ui->setupUi(this);
-
-    QListWidgetItem *nw = new QListWidgetItem;
-    simpleTaskListWidget *nt = new simpleTaskListWidget;
-
-    ui->listTasks->insertItem(0, nw);
-    ui->listTasks->setItemWidget(nw, nt);
-
-
-    simpleTask *aaa = new simpleTask;
-
-    aaa->setName("MyName");
-
-
-    nt->setTask(aaa);
 }
 
 mainScreen::~mainScreen()
@@ -36,5 +25,21 @@ void mainScreen::showOptions()
 
 void mainScreen::addTask()
 {
+    addTaskDialog *nt = new addTaskDialog(this);
+    connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
+    nt->exec();
+}
 
+void mainScreen::createTask(QString name)
+{
+    simpleTask *st = new simpleTask;
+    st->setName(name.toUtf8().constData());
+
+    QListWidgetItem *nw = new QListWidgetItem;
+    simpleTaskListWidget *nt = new simpleTaskListWidget;
+
+    ui->listTasks->insertItem(ui->listTasks->count(), nw);
+    ui->listTasks->setItemWidget(nw, nt);
+
+    nt->setTask(st);
 }
