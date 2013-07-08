@@ -1,76 +1,76 @@
 #include "simpletask.h"
 
-simpleTask::simpleTask()
+SimpleTask::SimpleTask()
 {
     _id = 0;
     _name = "";
 }
 
-simpleTask::~simpleTask()
+SimpleTask::~SimpleTask()
 {
 }
 
-bool simpleTask::isValid()
+bool SimpleTask::isValid()
 {
     return _id != 0;
 }
 
-void simpleTask::setId(unsigned int id)
+void SimpleTask::setId(uint32_t id)
 {
     _id = id;
 }
 
-unsigned int simpleTask::id()
+uint32_t SimpleTask::id()
 {
     return _id;
 }
 
-void simpleTask::setName(string name)
+void SimpleTask::setName(string name)
 {
     _name = name;
 }
 
-string simpleTask::name()
+string SimpleTask::name()
 {
     return _name;
 }
 
-void simpleTask::setDescription(string description)
+void SimpleTask::setDescription(string description)
 {
     _description = description;
 }
 
-string simpleTask::description()
+string SimpleTask::description()
 {
     return _description;
 }
 
-void simpleTask::setDone(bool done)
+void SimpleTask::setDone(bool done)
 {
     _done = done;
 }
 
-bool simpleTask::done()
+bool SimpleTask::done()
 {
     return _done;
 }
 
-void simpleTask::setTimeCreation(time_t timeCreation)
+void SimpleTask::setTimeCreation(time_t timeCreation)
 {
     _timeCreation = timeCreation;
 }
 
-time_t simpleTask::timeCreation()
+time_t SimpleTask::timeCreation()
 {
     return _timeCreation;
 }
 
-void simpleTask::setTimeDone(time_t timeDone)
+void SimpleTask::setTimeDone(time_t timeDone)
 {
     _timeDone = timeDone;
 }
 
-time_t simpleTask::timeDone()
+time_t SimpleTask::timeDone()
 {
     return _timeDone;
 }

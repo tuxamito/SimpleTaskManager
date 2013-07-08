@@ -4,19 +4,20 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <cstdint>
 
 using namespace std;
 
-class simpleTask
+class SimpleTask
 {
 public:
-    simpleTask();
-    ~simpleTask();
+    SimpleTask();
+    ~SimpleTask();
 
     bool isValid();
 
-    void setId(unsigned int id);
-    unsigned int id();
+    void setId(uint32_t id);
+    uint32_t id();
 
     void setName(string name);
     string name();
@@ -34,7 +35,7 @@ public:
     time_t timeDone();
 
 private:
-    unsigned int _id;
+    uint32_t _id;
     string _name;
 
     bool _done;
@@ -44,7 +45,7 @@ private:
     time_t _timeCreation;
     time_t _timeDone;
 
-    vector<class simpleTask> _subTasks;
+    vector<class SimpleTask> _subTasks;
 };
 
 #endif // SIMPLETASK_H

@@ -2,6 +2,7 @@
 #include "ui_mainscreen.h"
 
 #include <QListWidgetItem>
+#include <QCloseEvent>
 #include <QDebug>
 
 #include "addtaskdialog.h"
@@ -32,7 +33,7 @@ void mainScreen::addTask()
 
 void mainScreen::createTask(QString name)
 {
-    simpleTask *st = new simpleTask;
+    SimpleTask *st = new SimpleTask;
     st->setName(name.toUtf8().constData());
 
     QListWidgetItem *nw = new QListWidgetItem;
@@ -42,4 +43,10 @@ void mainScreen::createTask(QString name)
     ui->listTasks->setItemWidget(nw, nt);
 
     nt->setTask(st);
+}
+
+void mainScreen::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+    //event->accept();
 }

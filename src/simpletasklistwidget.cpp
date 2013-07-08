@@ -44,13 +44,13 @@ void simpleTaskListWidget::redraw()
 
 }
 
-void simpleTaskListWidget::setTask(simpleTask *task)
+void simpleTaskListWidget::setTask(SimpleTask *task)
 {
     _task = task;
     this->redraw();
 }
 
-simpleTask *simpleTaskListWidget::task()
+SimpleTask *simpleTaskListWidget::task()
 {
     return _task;
 }

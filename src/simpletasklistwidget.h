@@ -17,8 +17,8 @@ public:
     explicit simpleTaskListWidget(QWidget *parent = 0);
     ~simpleTaskListWidget();
     
-    void setTask(simpleTask *task);
-    simpleTask *task();
+    void setTask(SimpleTask *task);
+    SimpleTask *task();
 
     bool expanded();
 
@@ -33,7 +33,7 @@ private slots:
 private:
     Ui::simpleTaskListWidget *ui;
 
-    simpleTask *_task;
+    SimpleTask *_task;
 
     bool _expanded;
 };
