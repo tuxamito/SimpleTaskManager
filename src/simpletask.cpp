@@ -1,9 +1,14 @@
 #include "simpletask.h"
+#include "simpletaskoperations.h"
+
+#include <QByteArray>
+#include <QFile>
 
 SimpleTask::SimpleTask()
 {
     _id = 0;
     _name = "";
+    _done = NOTDONE;
 }
 
 SimpleTask::~SimpleTask()
@@ -45,12 +50,14 @@ string SimpleTask::description()
     return _description;
 }
 
-void SimpleTask::setDone(bool done)
+void SimpleTask::setDone(STDoneType done)
 {
     _done = done;
+
+    STSaveToFile(".", this);
 }
 
-bool SimpleTask::done()
+STDoneType SimpleTask::done()
 {
     return _done;
 }

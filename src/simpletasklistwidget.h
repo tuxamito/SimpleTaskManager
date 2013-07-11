@@ -26,7 +26,7 @@ public slots:
     void redraw();
 
 private slots:
-    void changeTaskDone(bool);
+    void changeTaskDone(bool done);
     void setExpanded(bool);
     void setExpandedToggle();
 

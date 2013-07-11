@@ -17,8 +17,6 @@ mainScreen::mainScreen(QWidget *parent) :
     ui->setupUi(this);
 
     this->loadInitData();
-
-    qDebug() << "sal";
 }
 
 mainScreen::~mainScreen()
@@ -47,17 +45,10 @@ void mainScreen::loadInitData()
 
             _stm.addTask(st);
 
-            QListWidgetItem *nw = new QListWidgetItem;
-            simpleTaskListWidget *nt = new simpleTaskListWidget;
-
-            ui->listTasks->insertItem(ui->listTasks->count(), nw);
-            ui->listTasks->setItemWidget(nw, nt);
-
-            nt->setTask(st);
+            this->addTaskToList(st);
         }    
     }
 }
-
 
 void mainScreen::showOptions()
 {
@@ -81,18 +72,20 @@ void mainScreen::createTask(QString name)
 
     _stm.addTask(st);
 
+    this->addTaskToList(st);
+
+    STSaveToFile(".", st);
+}
+
+void mainScreen::addTaskToList(SimpleTask* task)
+{
     QListWidgetItem *nw = new QListWidgetItem;
     simpleTaskListWidget *nt = new simpleTaskListWidget;
 
     ui->listTasks->insertItem(ui->listTasks->count(), nw);
     ui->listTasks->setItemWidget(nw, nt);
 
-    nt->setTask(st);
-
-    QByteArray data = STToBinary(st);
-    QFile f(QString(QString::number(st->id()) + "-" + st->name().c_str()) + ".stb");
-    f.open(QIODevice::Truncate | QIODevice::WriteOnly);
-    f.write(data);
+    nt->setTask(task);
 }
 
 void mainScreen::closeEvent(QCloseEvent *event)

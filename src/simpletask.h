@@ -6,6 +6,8 @@
 #include <ctime>
 #include <cstdint>
 
+enum STDoneType {NOTDONE, DONE};
+
 using namespace std;
 
 class SimpleTask
@@ -25,8 +27,8 @@ public:
     void setDescription(string description);
     string description();
 
-    void setDone(bool done);
-    bool done();
+    void setDone(STDoneType done);
+    STDoneType done();
 
     void setTimeCreation(time_t timeCreation);
     time_t timeCreation();
@@ -38,7 +40,7 @@ private:
     uint32_t _id;
     string _name;
 
-    bool _done;
+    STDoneType _done;
 
     string _description;
 

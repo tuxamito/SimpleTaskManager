@@ -30,6 +30,8 @@ private slots:
 private:
     Ui::mainScreen *ui;
 
+    void addTaskToList(SimpleTask* task);
+
     SimpleTaskManager _stm;
 };
 

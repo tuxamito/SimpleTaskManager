@@ -71,7 +71,14 @@ void simpleTaskListWidget::setExpandedToggle()
     this->setExpanded(!_expanded);
 }
 
-void simpleTaskListWidget::changeTaskDone(bool)
+void simpleTaskListWidget::changeTaskDone(bool done)
 {
-
+    if(done)
+    {
+        _task->setDone(DONE);
+    }
+    else
+    {
+        _task->setDone(NOTDONE);
+    }
 }
