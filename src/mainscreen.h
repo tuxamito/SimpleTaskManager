@@ -25,6 +25,7 @@ private slots:
     void showOptions();
     void addTask();
     void createTask(QString);
+    void loadInitData();
 
 private:
     Ui::mainScreen *ui;

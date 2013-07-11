@@ -2,6 +2,8 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#include <QDebug>
+
 #include "simpletaskoperations.h"
 
 QString STToQString(SimpleTask *st)
@@ -25,10 +27,22 @@ QByteArray STToBinary(SimpleTask *st)
 
 SimpleTask *STFromQString(QString st)
 {
+    SimpleTask *_st;
+    _st = new SimpleTask;
 
+    QJsonDocument doc;
+    doc = QJsonDocument::fromJson(st.toUtf8());
+
+    QJsonObject obj;
+    obj = doc.object();
+
+    _st->setName(obj.value("name").toString().toUtf8().constData());
+    _st->setId(obj.value("id").toString().toUInt());
+
+    return _st;
 }
 
 SimpleTask *STFromBinary(QByteArray st)
 {
-    return STFromQString(QString(st));
+    return STFromQString(qUncompress(st));
 }

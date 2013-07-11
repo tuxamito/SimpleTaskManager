@@ -7,6 +7,11 @@ addTaskDialog::addTaskDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef ANDROID
+    //ui->lineTaskName->setMinimumHeight(ui->lineTaskName->height() + 4);
+    this->setMinimumHeight(this->height() + 10);
+#endif
+
     connect(this, SIGNAL(accepted()), this, SLOT(acceptWork()));
 }
 
