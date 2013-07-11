@@ -30,7 +30,7 @@ private slots:
 private:
     Ui::mainScreen *ui;
 
-    SimpleTaskManager _tm;
+    SimpleTaskManager _stm;
 };
 
 #endif // MAINSCREEN_H

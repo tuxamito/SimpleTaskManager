@@ -43,7 +43,9 @@ void mainScreen::loadInitData()
 
             dfile.open(QIODevice::ReadOnly);
 
-            SimpleTask * st = STFromBinary(dfile.readAll());
+            SimpleTask *st = STFromBinary(dfile.readAll());
+
+            _stm.addTask(st);
 
             QListWidgetItem *nw = new QListWidgetItem;
             simpleTaskListWidget *nt = new simpleTaskListWidget;
@@ -77,6 +79,8 @@ void mainScreen::createTask(QString name)
     SimpleTask *st = new SimpleTask;
     st->setName(name.toUtf8().constData());
 
+    _stm.addTask(st);
+
     QListWidgetItem *nw = new QListWidgetItem;
     simpleTaskListWidget *nt = new simpleTaskListWidget;
 
@@ -86,7 +90,7 @@ void mainScreen::createTask(QString name)
     nt->setTask(st);
 
     QByteArray data = STToBinary(st);
-    QFile f(QString(st->name().c_str()) + ".stb");
+    QFile f(QString(QString::number(st->id()) + "-" + st->name().c_str()) + ".stb");
     f.open(QIODevice::Truncate | QIODevice::WriteOnly);
     f.write(data);
 }

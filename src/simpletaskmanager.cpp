@@ -19,7 +19,7 @@ uint32_t SimpleTaskManager::getFreeId()
 {
     for(uint32_t i = 1; i!=0; i++)
     {
-        if(!(_vui.find(i) != _vui.end()))
+        if(_vui.find(i) == _vui.end())
             return i;
     }
 
