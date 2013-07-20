@@ -47,7 +47,11 @@ private:
     time_t _timeCreation;
     time_t _timeDone;
 
+    bool _modified;
+
     vector<class SimpleTask> _subTasks;
+
+    inline void setModified();
 };
 
 #endif // SIMPLETASK_H

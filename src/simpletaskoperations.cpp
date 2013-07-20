@@ -15,7 +15,7 @@ QString STToQString(SimpleTask *st)
 
     obj.insert("id", QJsonValue(QString::number(st->id())));
     obj.insert("name", QJsonValue(QString(st->name().c_str())));
-    obj.insert("done", QJsonValue(STDoneTypeToInt(st->done())));
+    obj.insert("done", QJsonValue(QString::number(STDoneTypeToInt(st->done()))));
 
     doc.setObject(obj);
 

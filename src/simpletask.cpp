@@ -9,10 +9,17 @@ SimpleTask::SimpleTask()
     _id = 0;
     _name = "";
     _done = NOTDONE;
+
+    _modified = false;
 }
 
 SimpleTask::~SimpleTask()
 {
+}
+
+inline void SimpleTask::setModified()
+{
+    _modified = true;
 }
 
 bool SimpleTask::isValid()
@@ -23,6 +30,7 @@ bool SimpleTask::isValid()
 void SimpleTask::setId(uint32_t id)
 {
     _id = id;
+    this->setModified();
 }
 
 uint32_t SimpleTask::id()
@@ -33,6 +41,7 @@ uint32_t SimpleTask::id()
 void SimpleTask::setName(string name)
 {
     _name = name;
+    this->setModified();
 }
 
 string SimpleTask::name()
@@ -43,6 +52,7 @@ string SimpleTask::name()
 void SimpleTask::setDescription(string description)
 {
     _description = description;
+    this->setModified();
 }
 
 string SimpleTask::description()
@@ -53,8 +63,7 @@ string SimpleTask::description()
 void SimpleTask::setDone(STDoneType done)
 {
     _done = done;
-
-    STSaveToFile(".", this);
+    this->setModified();
 }
 
 STDoneType SimpleTask::done()
@@ -65,6 +74,7 @@ STDoneType SimpleTask::done()
 void SimpleTask::setTimeCreation(time_t timeCreation)
 {
     _timeCreation = timeCreation;
+    this->setModified();
 }
 
 time_t SimpleTask::timeCreation()
@@ -75,6 +85,7 @@ time_t SimpleTask::timeCreation()
 void SimpleTask::setTimeDone(time_t timeDone)
 {
     _timeDone = timeDone;
+    this->setModified();
 }
 
 time_t SimpleTask::timeDone()
