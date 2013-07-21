@@ -36,6 +36,11 @@ public:
     void setTimeDone(time_t timeDone);
     time_t timeDone();
 
+    void setFather(SimpleTask *father);
+    SimpleTask *father();
+
+    void setModified();
+
 private:
     uint32_t _id;
     string _name;
@@ -48,10 +53,9 @@ private:
     time_t _timeDone;
 
     bool _modified;
+    SimpleTask *_father;
 
     vector<class SimpleTask> _subTasks;
-
-    inline void setModified();
 };
 
 #endif // SIMPLETASK_H

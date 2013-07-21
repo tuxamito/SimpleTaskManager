@@ -18,6 +18,8 @@ public:
     SimpleTask *task(uint32_t id);
     void removeTask(uint32_t id);
 
+    void saveAll();
+
 private:
     vst_t _vst;
     unordered_set<uint32_t> _vui;

@@ -79,3 +79,8 @@ void SimpleTaskManager::removeTask(uint32_t id)
         _vst.erase(elem);
     }
 }
+
+void SimpleTaskManager::saveAll()
+{
+
+}

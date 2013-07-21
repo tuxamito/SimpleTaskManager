@@ -9,7 +9,7 @@ SimpleTask::SimpleTask()
     _id = 0;
     _name = "";
     _done = NOTDONE;
-
+    _father = NULL;
     _modified = false;
 }
 
@@ -20,6 +20,8 @@ SimpleTask::~SimpleTask()
 inline void SimpleTask::setModified()
 {
     _modified = true;
+    if(_father)
+        _father->setModified();
 }
 
 bool SimpleTask::isValid()
@@ -91,4 +93,15 @@ void SimpleTask::setTimeDone(time_t timeDone)
 time_t SimpleTask::timeDone()
 {
     return _timeDone;
+}
+
+void SimpleTask::setFather(SimpleTask *father)
+{
+    _father = father;
+    this->setModified();
+}
+
+SimpleTask *SimpleTask::father()
+{
+    return _father;
 }
