@@ -26,6 +26,7 @@ private slots:
     void addTask();
     void createTask(QString);
     void loadInitData();
+    void deleteTask(simpleTaskListWidget*);
 
 private:
     Ui::mainScreen *ui;

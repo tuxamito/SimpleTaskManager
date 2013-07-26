@@ -83,12 +83,30 @@ void mainScreen::createTask(QString name)
 void mainScreen::addTaskToList(SimpleTask* task)
 {
     QListWidgetItem *nw = new QListWidgetItem;
-    simpleTaskListWidget *nt = new simpleTaskListWidget;
+    simpleTaskListWidget *nt = new simpleTaskListWidget(nw);
 
     ui->listTasks->insertItem(ui->listTasks->count(), nw);
     ui->listTasks->setItemWidget(nw, nt);
 
     nt->setTask(task);
+
+    connect(nt, SIGNAL(deleteTask(simpleTaskListWidget*)), this, SLOT(deleteTask(simpleTaskListWidget*)));
+}
+
+void mainScreen::deleteTask(simpleTaskListWidget* tw)
+{
+    SimpleTask *t = tw->task();
+
+    QFile f(STGetTaskFileName(DATADIR, t));
+    if(f.exists())
+        f.remove();
+
+    _stm.removeTask(t->id());
+
+    ui->listTasks->takeItem(ui->listTasks->row(tw->myQLWI()));
+
+    delete tw;
+    delete t;
 }
 
 void mainScreen::closeEvent(QCloseEvent *event)

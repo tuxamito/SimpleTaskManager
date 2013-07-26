@@ -78,6 +78,7 @@ void SimpleTaskManager::removeTask(uint32_t id)
     if(elem != _vst.end())
     {
         _vst.erase(elem);
+        _vui.erase(id);
     }
 }
 

@@ -56,6 +56,19 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="buttonExpand">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="buttonOptions">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -73,7 +86,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonExpand">
+    <widget class="QPushButton" name="buttonDelete">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -81,7 +94,11 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string notr="true"/>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="icons.qrc">
+       <normaloff>:/icons/delete</normaloff>:/icons/delete</iconset>
      </property>
     </widget>
    </item>
@@ -123,9 +140,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>buttonDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>simpleTaskListWidget</receiver>
+   <slot>deleteTask()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>134</x>
+     <y>13</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>setExpandedToggle()</slot>
   <slot>changeTaskDone(bool)</slot>
+  <slot>deleteTask()</slot>
  </slots>
 </ui>

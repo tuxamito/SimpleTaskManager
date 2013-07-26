@@ -50,14 +50,19 @@ SimpleTask *STFromBinary(QByteArray st)
     return STFromQString(qUncompress(st));
 }
 
-void STSaveToFile(string dir, SimpleTask *task)
+QString STGetTaskFileName(string dir, SimpleTask *task)
 {
     QString _dir(dir.c_str());
     if(_dir == "")
         _dir = ".";
 
+    return QString(_dir) + "/" + QString(QString::number(task->id()) + "-" + task->name().c_str()) + ".stb";
+}
+
+void STSaveToFile(string dir, SimpleTask *task)
+{
     QByteArray data = STToBinary(task);
-    QFile f(QString(_dir) + "/" + QString(QString::number(task->id()) + "-" + task->name().c_str()) + ".stb");
+    QFile f(STGetTaskFileName(dir, task));
     f.open(QIODevice::Truncate | QIODevice::WriteOnly);
     f.write(data);
 }

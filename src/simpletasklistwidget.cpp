@@ -1,12 +1,13 @@
 #include "simpletasklistwidget.h"
 #include "ui_simpletasklistwidget.h"
 
-simpleTaskListWidget::simpleTaskListWidget(QWidget *parent) :
+simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::simpleTaskListWidget)
 {
     _task = NULL;
     _expanded = false;
+    _qlwi = qlwi;
 
     ui->setupUi(this);
 
@@ -17,6 +18,11 @@ simpleTaskListWidget::simpleTaskListWidget(QWidget *parent) :
 #endif
 
     this->redraw();
+}
+
+QListWidgetItem *simpleTaskListWidget::myQLWI()
+{
+    return _qlwi;
 }
 
 simpleTaskListWidget::~simpleTaskListWidget()
@@ -95,4 +101,9 @@ void simpleTaskListWidget::changeTaskDone(bool done)
     }
 
     this->redraw();
+}
+
+void simpleTaskListWidget::deleteTask()
+{
+    emit deleteTask(this);
 }
