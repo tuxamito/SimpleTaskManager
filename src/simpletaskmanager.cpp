@@ -81,14 +81,14 @@ void SimpleTaskManager::removeTask(uint32_t id)
     }
 }
 
-void SimpleTaskManager::saveAll()
+void SimpleTaskManager::saveAll(string dir)
 {
     for (auto i = _vst.begin(); i != _vst.end(); ++i)
     {
         SimpleTask *t = i->second;
         if(t->modified())
         {
-            STSaveToFile(".", t);
+            STSaveToFile(dir, t);
         }
     }
 }

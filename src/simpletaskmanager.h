@@ -18,7 +18,7 @@ public:
     SimpleTask *task(uint32_t id);
     void removeTask(uint32_t id);
 
-    void saveAll();
+    void saveAll(string dir);
 
 private:
     vst_t _vst;

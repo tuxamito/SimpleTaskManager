@@ -50,9 +50,9 @@ SimpleTask *STFromBinary(QByteArray st)
     return STFromQString(qUncompress(st));
 }
 
-void STSaveToFile(QString dir, SimpleTask *task)
+void STSaveToFile(string dir, SimpleTask *task)
 {
-    QString _dir = dir;
+    QString _dir(dir.c_str());
     if(_dir == "")
         _dir = ".";
 

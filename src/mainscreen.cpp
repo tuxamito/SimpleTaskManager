@@ -10,6 +10,8 @@
 #include "addtaskdialog.h"
 #include "simpletaskoperations.h"
 
+#define DATADIR "DATA"
+
 mainScreen::mainScreen(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainScreen)
@@ -26,8 +28,11 @@ mainScreen::~mainScreen()
 
 void mainScreen::loadInitData()
 {
+    if(!QDir(DATADIR).exists())
+        QDir().mkdir(DATADIR);
+
     QDirIterator *dirIt;
-    dirIt = new QDirIterator(".", QDirIterator::NoIteratorFlags);
+    dirIt = new QDirIterator(DATADIR, QDirIterator::NoIteratorFlags);
 
     while (dirIt->hasNext())
     {
@@ -88,6 +93,9 @@ void mainScreen::addTaskToList(SimpleTask* task)
 
 void mainScreen::closeEvent(QCloseEvent *event)
 {
-    _stm.saveAll();
+    if(!QDir(DATADIR).exists())
+        QDir().mkdir(DATADIR);
+
+    _stm.saveAll(DATADIR);
     event->accept();
 }
