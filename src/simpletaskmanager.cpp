@@ -1,4 +1,5 @@
 #include "simpletaskmanager.h"
+#include "simpletaskoperations.h"
 
 #include <algorithm>
 
@@ -82,5 +83,12 @@ void SimpleTaskManager::removeTask(uint32_t id)
 
 void SimpleTaskManager::saveAll()
 {
-
+    for (auto i = _vst.begin(); i != _vst.end(); ++i)
+    {
+        SimpleTask *t = i->second;
+        if(t->modified())
+        {
+            STSaveToFile(".", t);
+        }
+    }
 }

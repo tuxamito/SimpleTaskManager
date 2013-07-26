@@ -105,3 +105,8 @@ SimpleTask *SimpleTask::father()
 {
     return _father;
 }
+
+bool SimpleTask::modified()
+{
+    return _modified;
+}

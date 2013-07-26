@@ -71,10 +71,8 @@ void mainScreen::createTask(QString name)
     st->setName(name.toUtf8().constData());
 
     _stm.addTask(st);
-
+    st->setModified();
     this->addTaskToList(st);
-
-    STSaveToFile(".", st);
 }
 
 void mainScreen::addTaskToList(SimpleTask* task)
@@ -90,6 +88,6 @@ void mainScreen::addTaskToList(SimpleTask* task)
 
 void mainScreen::closeEvent(QCloseEvent *event)
 {
-    //event->ignore();
+    _stm.saveAll();
     event->accept();
 }

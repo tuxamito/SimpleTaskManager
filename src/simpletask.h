@@ -40,6 +40,7 @@ public:
     SimpleTask *father();
 
     void setModified();
+    bool modified();
 
 private:
     uint32_t _id;
