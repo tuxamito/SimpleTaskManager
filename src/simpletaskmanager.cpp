@@ -5,10 +5,16 @@
 
 SimpleTaskManager::SimpleTaskManager()
 {
+    _dir = "";
 }
 
 SimpleTaskManager::~SimpleTaskManager()
 {
+}
+
+void SimpleTaskManager::setSaveDir(string dir)
+{
+    _dir = dir;
 }
 
 bool SimpleTaskManager::findId(uint32_t id)
@@ -84,14 +90,21 @@ void SimpleTaskManager::removeTask(uint32_t id)
     }
 }
 
-void SimpleTaskManager::saveAll(string dir)
+void SimpleTaskManager::saveAll()
 {
     for (auto i = _vst.begin(); i != _vst.end(); ++i)
     {
         SimpleTask *t = i->second;
         if(t->modified())
         {
-            STSaveToFile(dir, t);
+            STSaveToFile(_dir, t);
+            t->setSaved();
         }
     }
+}
+
+void SimpleTaskManager::saveTask(SimpleTask *task)
+{
+    STSaveToFile(_dir, task);
+    task->setSaved();
 }

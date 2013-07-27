@@ -1,5 +1,6 @@
 #include "simpletask.h"
 #include "simpletaskoperations.h"
+#include "simpletaskmanager.h"
 
 #include <QByteArray>
 #include <QFile>
@@ -25,9 +26,19 @@ inline void SimpleTask::setModified()
     {
         _father->setModified();
     }
-    else
+    else if (_manager)
     {
+        _manager->saveTask(this);
+    }
+}
 
+void SimpleTask::setSaved()
+{
+    _modified = false;
+
+    for(auto i = _subTasks.begin(); i != _subTasks.end(); ++i)
+    {
+        (*i)->setSaved();
     }
 }
 

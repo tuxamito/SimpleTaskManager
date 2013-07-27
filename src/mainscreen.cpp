@@ -16,6 +16,11 @@ mainScreen::mainScreen(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::mainScreen)
 {
+    if(!QDir(DATADIR).exists())
+        QDir().mkdir(DATADIR);
+
+    _stm.setSaveDir(DATADIR);
+
     ui->setupUi(this);
 
     this->loadInitData();
@@ -28,9 +33,6 @@ mainScreen::~mainScreen()
 
 void mainScreen::loadInitData()
 {
-    if(!QDir(DATADIR).exists())
-        QDir().mkdir(DATADIR);
-
     QDirIterator *dirIt;
     dirIt = new QDirIterator(DATADIR, QDirIterator::NoIteratorFlags);
 
@@ -111,9 +113,6 @@ void mainScreen::deleteTask(simpleTaskListWidget* tw)
 
 void mainScreen::closeEvent(QCloseEvent *event)
 {
-    if(!QDir(DATADIR).exists())
-        QDir().mkdir(DATADIR);
-
-    _stm.saveAll(DATADIR);
+    _stm.saveAll();
     event->accept();
 }

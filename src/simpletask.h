@@ -45,6 +45,7 @@ public:
 
     void setModified();
     bool modified();
+    void setSaved();
 
 private:
     uint32_t _id;
@@ -61,7 +62,7 @@ private:
     SimpleTask *_father;
     SimpleTaskManager *_manager;
 
-    vector<class SimpleTask> _subTasks;
+    vector<class SimpleTask*> _subTasks;
 };
 
 #endif // SIMPLETASK_H

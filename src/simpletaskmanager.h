@@ -17,11 +17,16 @@ public:
     uint32_t addTask(SimpleTask *task);
     SimpleTask *task(uint32_t id);
     void removeTask(uint32_t id);
-    void saveAll(string dir);
+    void saveAll();
+
+    void saveTask(SimpleTask *task);
+    void setSaveDir(string dir);
 
 private:
     vst_t _vst;
     unordered_set<uint32_t> _vui;
+
+    string _dir;
 
     uint32_t getFreeId();
     bool findId(uint32_t id);
