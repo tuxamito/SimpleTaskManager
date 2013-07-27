@@ -10,6 +10,7 @@ SimpleTask::SimpleTask()
     _name = "";
     _done = NOTDONE;
     _father = NULL;
+    _manager = NULL;
     _modified = false;
 }
 
@@ -21,7 +22,13 @@ inline void SimpleTask::setModified()
 {
     _modified = true;
     if(_father)
+    {
         _father->setModified();
+    }
+    else
+    {
+
+    }
 }
 
 bool SimpleTask::isValid()
@@ -104,6 +111,16 @@ void SimpleTask::setFather(SimpleTask *father)
 SimpleTask *SimpleTask::father()
 {
     return _father;
+}
+
+void SimpleTask::setManager(SimpleTaskManager *manager)
+{
+    _manager = manager;
+}
+
+SimpleTaskManager *SimpleTask::manager()
+{
+    return _manager;
 }
 
 bool SimpleTask::modified()

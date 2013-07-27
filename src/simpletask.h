@@ -7,6 +7,7 @@
 #include <cstdint>
 
 enum STDoneType {NOTDONE, DONE};
+class SimpleTaskManager;
 
 using namespace std;
 
@@ -39,6 +40,9 @@ public:
     void setFather(SimpleTask *father);
     SimpleTask *father();
 
+    void setManager(SimpleTaskManager *);
+    SimpleTaskManager *manager();
+
     void setModified();
     bool modified();
 
@@ -55,6 +59,7 @@ private:
 
     bool _modified;
     SimpleTask *_father;
+    SimpleTaskManager *_manager;
 
     vector<class SimpleTask> _subTasks;
 };

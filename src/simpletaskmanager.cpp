@@ -41,6 +41,7 @@ uint32_t SimpleTaskManager::addTask(SimpleTask *task)
         {
             _vui.insert(nid);
             _vst.insert(vst_t::value_type(nid, task));
+            task->setManager(this);
         }
     }
     else
@@ -51,6 +52,7 @@ uint32_t SimpleTaskManager::addTask(SimpleTask *task)
             task->setId(nid);
             _vui.insert(nid);
             _vst.insert(vst_t::value_type(nid, task));
+            task->setManager(this);
         }
     }
 
