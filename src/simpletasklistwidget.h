@@ -6,6 +6,7 @@
 #include <QEvent>
 #include <QGestureEvent>
 #include <QMouseEvent>
+#include <QPoint>
 
 #include "simpletask.h"
 
@@ -53,6 +54,8 @@ private:
     QListWidgetItem * _qlwi;
 
     bool _expanded;
+
+    QPoint _menuPos;
 };
 
 #endif // SIMPLETASKLISTWIDGET_H

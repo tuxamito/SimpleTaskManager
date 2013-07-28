@@ -3,6 +3,7 @@
 
 #include <QMenu>
 #include <QDebug>
+#include <QGestureEvent>
 
 simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *parent) :
     QWidget(parent),
@@ -15,9 +16,8 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     ui->setupUi(this);
 
     this->grabGesture(Qt::TapAndHoldGesture);
-
-    //this->setMouseTracking(true);
-    installEventFilter(this);
+    _menuPos.setX(0);
+    _menuPos.setY(0);
 
 #ifdef ANDROID
     int size = ui->label->height() - 4;
@@ -43,6 +43,10 @@ bool simpleTaskListWidget::event(QEvent *event)
     {
         return mouseEvent(static_cast<QMouseEvent*>(event));
     }
+    else if(event->type() == QEvent::MouseButtonPress)
+    {
+        return mouseEvent(static_cast<QMouseEvent*>(event));
+    }
 
     return QWidget::event(event);
 }
@@ -51,18 +55,37 @@ bool simpleTaskListWidget::mouseEvent(QMouseEvent *event)
 {
     if(event->type() == QEvent::ContextMenu)
     {
-        showMenu(0, 0);
+        showMenu(_menuPos.x(), _menuPos.y());
     }
+    else if(event->type() == QEvent::MouseButtonPress)
+    {
+        _menuPos = event->globalPos();
+    }
+
+    event->accept();
 
     return true;
 }
 
 bool simpleTaskListWidget::gestureEvent(QGestureEvent *event)
 {
-    if(event->gesture(Qt::TapAndHoldGesture))
+    qDebug() << "AAAAAA";
+    if(const QGesture *g = event->gesture(Qt::TapAndHoldGesture))
     {
-        showMenu(0, 0);
+        qDebug() << "BBBBBB";
+        if (g->state() == Qt::GestureFinished)
+        {
+           qDebug() << "CCCCCC";
+            QPoint p = this->mapToGlobal(g->hotSpot().toPoint());
+
+            qDebug() << "POSf: " << g->hotSpot().x() << g->hotSpot().y();
+            qDebug() << "POSi: " << p.x() << p.y();
+
+            showMenu(p.x(), p.y());
+        }
     }
+
+    event->accept();
 
     return true;
 }
