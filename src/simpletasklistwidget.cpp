@@ -1,6 +1,9 @@
 #include "simpletasklistwidget.h"
 #include "ui_simpletasklistwidget.h"
 
+#include <QMenu>
+#include <QDebug>
+
 simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::simpleTaskListWidget)
@@ -11,6 +14,11 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
 
     ui->setupUi(this);
 
+    this->grabGesture(Qt::TapAndHoldGesture);
+
+    //this->setMouseTracking(true);
+    installEventFilter(this);
+
 #ifdef ANDROID
     int size = ui->label->height() - 4;
     QString style("QCheckBox::indicator { width: " + QString::number(size) + "px; height: " + QString::number(size) + "px; }");
@@ -20,14 +28,57 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     this->redraw();
 }
 
-QListWidgetItem *simpleTaskListWidget::myQLWI()
-{
-    return _qlwi;
-}
-
 simpleTaskListWidget::~simpleTaskListWidget()
 {
     delete ui;
+}
+
+bool simpleTaskListWidget::event(QEvent *event)
+{
+    if (event->type() == QEvent::Gesture)
+    {
+        return gestureEvent(static_cast<QGestureEvent*>(event));
+    }
+    else if(event->type() == QEvent::ContextMenu)
+    {
+        return mouseEvent(static_cast<QMouseEvent*>(event));
+    }
+
+    return QWidget::event(event);
+}
+
+bool simpleTaskListWidget::mouseEvent(QMouseEvent *event)
+{
+    if(event->type() == QEvent::ContextMenu)
+    {
+        showMenu(0, 0);
+    }
+
+    return true;
+}
+
+bool simpleTaskListWidget::gestureEvent(QGestureEvent *event)
+{
+    if(event->gesture(Qt::TapAndHoldGesture))
+    {
+        showMenu(0, 0);
+    }
+
+    return true;
+}
+
+void simpleTaskListWidget::showMenu(int x, int y)
+{
+    QMenu *menu = new QMenu(this);
+    menu->addAction(new QAction("New",this));
+    menu->addAction(new QAction("Edit",this));
+    menu->addAction(new QAction("Delete",this));
+    menu->exec(QPoint(x, y));
+}
+
+QListWidgetItem *simpleTaskListWidget::myQLWI()
+{
+    return _qlwi;
 }
 
 void simpleTaskListWidget::redraw()

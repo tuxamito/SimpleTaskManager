@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QListWidgetItem>
+#include <QEvent>
+#include <QGestureEvent>
+#include <QMouseEvent>
 
 #include "simpletask.h"
 
@@ -38,6 +41,12 @@ signals:
     void deleteTask(simpleTaskListWidget *);
 
 private:
+    bool event(QEvent *event);
+    bool mouseEvent(QMouseEvent *event);
+    bool gestureEvent(QGestureEvent *event);
+
+    void showMenu(int x, int y);
+
     Ui::simpleTaskListWidget *ui;
     SimpleTask *_task;
 
