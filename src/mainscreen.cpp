@@ -7,6 +7,8 @@
 #include <QFile>
 #include <QDebug>
 
+#include "simpletaskaddwindow.h"
+
 #include "addtaskdialog.h"
 #include "simpletaskoperations.h"
 
@@ -64,12 +66,16 @@ void mainScreen::showOptions()
 
 void mainScreen::addTask()
 {
-    addTaskDialog *nt = new addTaskDialog(this);
+    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow();
+
     connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
+    connect(nt, SIGNAL(destroyed()), this, SLOT(repaint()));
 
-    nt->exec();
-
-    this->repaint();
+#ifdef ANDROID
+    nt->showFullScreen();
+#else
+    nt->show();
+#endif
 }
 
 void mainScreen::createTask(QString name)
