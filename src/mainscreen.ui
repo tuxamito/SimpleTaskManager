@@ -19,28 +19,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="buttonOptions">
-       <property name="text">
-        <string>Options</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboTaskGroup"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QListWidget" name="listTasks"/>
-   </item>
-   <item>
-    <widget class="QPushButton" name="buttonAddTask">
-     <property name="text">
-      <string>Add Task</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="layout"/>
    </item>
   </layout>
  </widget>
@@ -48,40 +27,7 @@
  <resources>
   <include location="icons.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonAddTask</sender>
-   <signal>clicked()</signal>
-   <receiver>mainScreen</receiver>
-   <slot>addTask()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>204</x>
-     <y>412</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>204</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonOptions</sender>
-   <signal>clicked()</signal>
-   <receiver>mainScreen</receiver>
-   <slot>showOptions()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>105</x>
-     <y>23</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>204</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>showOptions()</slot>
   <slot>addTask()</slot>

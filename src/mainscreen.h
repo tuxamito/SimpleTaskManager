@@ -3,9 +3,6 @@
 
 #include <QWidget>
 
-#include "simpletaskmanager.h"
-#include "simpletasklistwidget.h"
-
 namespace Ui {
 class mainScreen;
 }
@@ -18,22 +15,8 @@ public:
     explicit mainScreen(QWidget *parent = 0);
     ~mainScreen();
 
-protected:
-    void closeEvent(QCloseEvent *event);
-
-private slots:
-    void showOptions();
-    void addTask();
-    void createTask(QString);
-    void loadInitData();
-    void deleteTask(simpleTaskListWidget*);
-
 private:
     Ui::mainScreen *ui;
-
-    void addTaskToList(SimpleTask* task);
-
-    SimpleTaskManager _stm;
 };
 
 #endif // MAINSCREEN_H
