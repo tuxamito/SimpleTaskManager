@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include "simpletaskmanager.h"
+#include "simpletasklistwindow.h"
+
 namespace Ui {
 class mainScreen;
 }
@@ -17,6 +20,9 @@ public:
 
 private:
     Ui::mainScreen *ui;
+
+    SimpleTaskListWindow *_stlw;
+    SimpleTaskManager *_stm;
 };
 
 #endif // MAINSCREEN_H

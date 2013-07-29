@@ -21,6 +21,7 @@ public:
 
     void saveTask(SimpleTask *task);
     void setSaveDir(string dir);
+    string saveDir();
 
 private:
     vst_t _vst;

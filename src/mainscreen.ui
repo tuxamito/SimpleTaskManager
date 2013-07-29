@@ -18,8 +18,15 @@
     <normaloff>:/icons/main</normaloff>:/icons/main</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
    <item>
-    <layout class="QHBoxLayout" name="layout"/>
+    <layout class="QHBoxLayout" name="layout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </item>
   </layout>
  </widget>

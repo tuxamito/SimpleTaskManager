@@ -17,6 +17,11 @@ void SimpleTaskManager::setSaveDir(string dir)
     _dir = dir;
 }
 
+string SimpleTaskManager::saveDir()
+{
+    return _dir;
+}
+
 bool SimpleTaskManager::findId(uint32_t id)
 {
     return _vui.find(id) != _vui.end();

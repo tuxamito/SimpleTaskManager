@@ -15,7 +15,7 @@ class SimpleTaskListWindow : public QWidget
     Q_OBJECT
     
 public:
-    explicit SimpleTaskListWindow(QWidget *parent = 0);
+    explicit SimpleTaskListWindow(SimpleTaskManager *stm, QWidget *parent = 0);
     ~SimpleTaskListWindow();
     
 protected:
@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::SimpleTaskListWindow *ui;
     void addTaskToList(SimpleTask* task);
-    SimpleTaskManager _stm;
+    SimpleTaskManager *_stm;
 };
 
 #endif // SIMPLETASKLISTWINDOW_H

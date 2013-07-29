@@ -12,18 +12,16 @@
 #include "addtaskdialog.h"
 #include "simpletaskoperations.h"
 
-#define DATADIR "DATA"
 
-SimpleTaskListWindow::SimpleTaskListWindow(QWidget *parent) :
+
+SimpleTaskListWindow::SimpleTaskListWindow(SimpleTaskManager *stm, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SimpleTaskListWindow)
 {
     ui->setupUi(this);
 
-    if(!QDir(DATADIR).exists())
-        QDir().mkdir(DATADIR);
+    _stm = stm;
 
-    _stm.setSaveDir(DATADIR);
     this->loadInitData();
 }
 
@@ -35,7 +33,7 @@ SimpleTaskListWindow::~SimpleTaskListWindow()
 void SimpleTaskListWindow::loadInitData()
 {
     QDirIterator *dirIt;
-    dirIt = new QDirIterator(DATADIR, QDirIterator::NoIteratorFlags);
+    dirIt = new QDirIterator(_stm->saveDir().c_str(), QDirIterator::NoIteratorFlags);
 
     while (dirIt->hasNext())
     {
@@ -51,7 +49,7 @@ void SimpleTaskListWindow::loadInitData()
 
             SimpleTask *st = STFromBinary(dfile.readAll());
 
-            _stm.addTask(st);
+            _stm->addTask(st);
 
             this->addTaskToList(st);
         }
@@ -82,7 +80,7 @@ void SimpleTaskListWindow::createTask(QString name)
     SimpleTask *st = new SimpleTask;
     st->setName(name.toUtf8().constData());
 
-    _stm.addTask(st);
+    _stm->addTask(st);
     st->setModified();
     this->addTaskToList(st);
 }
@@ -104,11 +102,11 @@ void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)
 {
     SimpleTask *t = tw->task();
 
-    QFile f(STGetTaskFileName(DATADIR, t));
+    QFile f(STGetTaskFileName(_stm->saveDir().c_str(), t));
     if(f.exists())
         f.remove();
 
-    _stm.removeTask(t->id());
+    _stm->removeTask(t->id());
 
     ui->listTasks->takeItem(ui->listTasks->row(tw->myQLWI()));
 
@@ -118,6 +116,6 @@ void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)
 
 void SimpleTaskListWindow::closeEvent(QCloseEvent *event)
 {
-    _stm.saveAll();
+    _stm->saveAll();
     event->accept();
 }
