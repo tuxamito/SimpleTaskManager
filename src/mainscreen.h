@@ -18,6 +18,9 @@ public:
     explicit mainScreen(QWidget *parent = 0);
     ~mainScreen();
 
+private slots:
+    void loadInitData();
+
 private:
     Ui::mainScreen *ui;
 

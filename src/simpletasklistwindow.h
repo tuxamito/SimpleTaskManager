@@ -18,6 +18,9 @@ public:
     explicit SimpleTaskListWindow(SimpleTaskManager *stm, QWidget *parent = 0);
     ~SimpleTaskListWindow();
     
+public slots:
+    void update();
+
 protected:
     void closeEvent(QCloseEvent *event);
 
@@ -25,7 +28,6 @@ private slots:
     void showOptions();
     void addTask();
     void createTask(QString);
-    void loadInitData();
     void deleteTask(simpleTaskListWidget*);
 
 private:

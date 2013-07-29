@@ -97,7 +97,7 @@ void SimpleTaskManager::removeTask(uint32_t id)
 
 void SimpleTaskManager::saveAll()
 {
-    for (auto i = _vst.begin(); i != _vst.end(); ++i)
+    for(auto i = _vst.begin(); i != _vst.end(); ++i)
     {
         SimpleTask *t = i->second;
         if(t->modified())
@@ -106,6 +106,11 @@ void SimpleTaskManager::saveAll()
             t->setSaved();
         }
     }
+}
+
+vst_t SimpleTaskManager::currentTasks()
+{
+    return _vst;
 }
 
 void SimpleTaskManager::saveTask(SimpleTask *task)

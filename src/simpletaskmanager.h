@@ -23,6 +23,8 @@ public:
     void setSaveDir(string dir);
     string saveDir();
 
+    vst_t currentTasks();
+
 private:
     vst_t _vst;
     unordered_set<uint32_t> _vui;

@@ -12,17 +12,14 @@
 #include "addtaskdialog.h"
 #include "simpletaskoperations.h"
 
-
-
 SimpleTaskListWindow::SimpleTaskListWindow(SimpleTaskManager *stm, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SimpleTaskListWindow)
 {
     ui->setupUi(this);
-
     _stm = stm;
 
-    this->loadInitData();
+    this->update();
 }
 
 SimpleTaskListWindow::~SimpleTaskListWindow()
@@ -30,29 +27,14 @@ SimpleTaskListWindow::~SimpleTaskListWindow()
     delete ui;
 }
 
-void SimpleTaskListWindow::loadInitData()
+void SimpleTaskListWindow::update()
 {
-    QDirIterator *dirIt;
-    dirIt = new QDirIterator(_stm->saveDir().c_str(), QDirIterator::NoIteratorFlags);
+    vst_t tasks = _stm->currentTasks();
 
-    while (dirIt->hasNext())
+    for(auto i = tasks.begin(); i != tasks.end(); ++i)
     {
-        dirIt->next();
-        QString _f = dirIt->filePath();
-        QFileInfo f(_f);
-
-        if(f.suffix() == "stb")
-        {
-            QFile dfile(dirIt->filePath());
-
-            dfile.open(QIODevice::ReadOnly);
-
-            SimpleTask *st = STFromBinary(dfile.readAll());
-
-            _stm->addTask(st);
-
-            this->addTaskToList(st);
-        }
+        SimpleTask *t = i->second;
+        this->addTaskToList(t);
     }
 }
 
