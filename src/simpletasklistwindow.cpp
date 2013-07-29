@@ -56,6 +56,8 @@ void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
     ui->listTasks->insertItem(ui->listTasks->count(), nw);
     ui->listTasks->setItemWidget(nw, nt);
 
+    nw->setSizeHint(nt->sizeHint() + QSize(0, 20));
+
     nt->setTask(task);
 
     connect(nt, SIGNAL(deleteTask(simpleTaskListWidget*)), this, SLOT(deleteTask(simpleTaskListWidget*)));

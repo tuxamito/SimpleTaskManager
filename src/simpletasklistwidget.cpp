@@ -20,6 +20,10 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     _menuPos.setY(0);
 
 #ifdef ANDROID
+    ui->buttonOptions->setIconSize(QSize(32, 32));
+
+    //ui->label->setMinimumHeight(ui->label->height() + 10);
+
     int size = ui->label->height() - 4;
     QString style("QCheckBox::indicator { width: " + QString::number(size) + "px; height: " + QString::number(size) + "px; }");
     ui->checkDone->setStyleSheet(style);
