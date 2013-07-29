@@ -14,6 +14,9 @@ mainScreen::mainScreen(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Set variables
+    _staw = NULL;
+
     //Create directory where data is stored if
     //it doesn't exist
     if(!QDir(DATADIR).exists())
@@ -27,8 +30,10 @@ mainScreen::mainScreen(QWidget *parent) :
     //Create the Permanent Windows
     _stlw = new SimpleTaskListWindow(_stm, this);
 
+    connect(_stlw, SIGNAL(newTask()), this, SLOT(showAddTask()));
+
     //Show the default Window
-    ui->layout->addWidget(_stlw);
+    this->showTaskList();
 }
 
 mainScreen::~mainScreen()
@@ -57,4 +62,40 @@ void mainScreen::loadInitData()
             _stm->addTask(st);
         }
     }
+}
+
+void mainScreen::showAddTask()
+{
+    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow();
+
+    nt->setAttribute(Qt::WA_DeleteOnClose);
+    connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
+    connect(nt, SIGNAL(destroyed()), this, SLOT(showTaskList()));
+
+    ui->layout->removeWidget(_stlw);
+    _stlw->setHidden(true);
+    ui->layout->addWidget(nt);
+    _staw = nt;
+}
+
+void mainScreen::showTaskList()
+{
+    if(_staw)
+    {
+        ui->layout->removeWidget(_staw);
+        _staw = NULL;
+    }
+
+    ui->layout->addWidget(_stlw);
+    _stlw->setHidden(false);
+}
+
+void mainScreen::createTask(QString name)
+{
+    SimpleTask *st = new SimpleTask;
+    st->setName(name.toUtf8().constData());
+
+    _stm->addTask(st);
+    st->setModified();
+    _stlw->addTaskToList(st);
 }

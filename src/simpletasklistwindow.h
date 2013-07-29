@@ -19,6 +19,7 @@ public:
     ~SimpleTaskListWindow();
     
 public slots:
+    void addTaskToList(SimpleTask* task);
     void update();
 
 protected:
@@ -27,12 +28,13 @@ protected:
 private slots:
     void showOptions();
     void addTask();
-    void createTask(QString);
     void deleteTask(simpleTaskListWidget*);
+
+signals:
+    void newTask();
 
 private:
     Ui::SimpleTaskListWindow *ui;
-    void addTaskToList(SimpleTask* task);
     SimpleTaskManager *_stm;
 };
 

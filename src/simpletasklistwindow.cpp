@@ -45,26 +45,7 @@ void SimpleTaskListWindow::showOptions()
 
 void SimpleTaskListWindow::addTask()
 {
-    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow();
-
-    connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
-    connect(nt, SIGNAL(destroyed()), this, SLOT(repaint()));
-
-#ifdef ANDROID
-    nt->showFullScreen();
-#else
-    nt->show();
-#endif
-}
-
-void SimpleTaskListWindow::createTask(QString name)
-{
-    SimpleTask *st = new SimpleTask;
-    st->setName(name.toUtf8().constData());
-
-    _stm->addTask(st);
-    st->setModified();
-    this->addTaskToList(st);
+    emit newTask();
 }
 
 void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
