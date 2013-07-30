@@ -30,10 +30,12 @@ private slots:
     void addTask();
     void deleteTask(simpleTaskListWidget*);
     void showInfo(simpleTaskListWidget *);
+    void showMenu(simpleTaskListWidget *);
 
 signals:
     void newTask();
     void showTaskInfo(simpleTaskListWidget*);
+    void showTaskMenu(simpleTaskListWidget*);
 
 private:
     Ui::SimpleTaskListWindow *ui;

@@ -42,6 +42,7 @@ private slots:
 signals:
     void deleteTask(simpleTaskListWidget *);
     void showInfo(simpleTaskListWidget *);
+    void showMenu(simpleTaskListWidget *);
 
 private:
     bool event(QEvent *event);

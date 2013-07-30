@@ -7,6 +7,7 @@
 #include "simpletasklistwindow.h"
 #include "simpletaskaddwindow.h"
 #include "simpletaskinfowindow.h"
+#include "simpletasklistwidgetmenu.h"
 
 namespace Ui {
 class mainScreen;
@@ -26,6 +27,7 @@ private slots:
     void showTaskInfo(simpleTaskListWidget*);
     void showAddTask();
     void showTaskList();
+    void showTaskListMenu(simpleTaskListWidget*);
 
     void createTask(QString);
 
@@ -36,6 +38,7 @@ private:
     SimpleTaskManager *_stm;
     SimpleTaskAddWindow *_staw;
     SimpleTaskInfoWindow *_stiw;
+    SimpleTaskListWidgetMenu *_stmw;
 };
 
 #endif // MAINSCREEN_H

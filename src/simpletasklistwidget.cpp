@@ -100,11 +100,20 @@ bool simpleTaskListWidget::gestureEvent(QGestureEvent *event)
 
 void simpleTaskListWidget::showMenu(int x, int y)
 {
+    emit showMenu(this);
+
+    /*
+    //FIXME: maybe QCursor is enough!
+    //qDebug() << "POS: " << x << ", " << y;
+    //qDebug() << "CUR: " << QCursor::pos().x() << ", " << QCursor::pos().y();
+
     QMenu *menu = new QMenu(this);
     menu->addAction(new QAction("New",this));
     menu->addAction(new QAction("Edit",this));
     menu->addAction(new QAction("Delete",this));
-    menu->exec(QPoint(x, y));
+    //menu->exec(QPoint(x, y));
+    menu->exec(QCursor::pos());
+    */
 }
 
 QListWidgetItem *simpleTaskListWidget::myQLWI()

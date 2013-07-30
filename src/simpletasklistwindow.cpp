@@ -60,6 +60,12 @@ void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
 
     connect(nt, SIGNAL(showInfo(simpleTaskListWidget*)), this, SLOT(showInfo(simpleTaskListWidget*)));
     connect(nt, SIGNAL(deleteTask(simpleTaskListWidget*)), this, SLOT(deleteTask(simpleTaskListWidget*)));
+    connect(nt, SIGNAL(showMenu(simpleTaskListWidget*)), this, SLOT(showMenu(simpleTaskListWidget*)));
+}
+
+void SimpleTaskListWindow::showMenu(simpleTaskListWidget *tw)
+{
+    emit showTaskMenu(tw);
 }
 
 void SimpleTaskListWindow::showInfo(simpleTaskListWidget *tw)
