@@ -13,6 +13,7 @@ SimpleTask *STFromQString(QString st);
 SimpleTask *STFromBinary(QByteArray st);
 
 QString STGetTaskFileName(string dir, SimpleTask *task);
+QString STGetTaskFileOldName(string dir, SimpleTask *task);
 void STSaveToFile(string dir, SimpleTask *task);
 
 int STDoneTypeToInt(STDoneType val);

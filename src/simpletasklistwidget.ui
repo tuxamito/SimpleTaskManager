@@ -228,10 +228,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>buttonOptions</sender>
+   <signal>clicked()</signal>
+   <receiver>simpleTaskListWidget</receiver>
+   <slot>showOptions()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>191</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>13</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>setExpandedToggle()</slot>
   <slot>changeTaskDone(bool)</slot>
   <slot>deleteTask()</slot>
+  <slot>showOptions()</slot>
  </slots>
 </ui>

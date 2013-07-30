@@ -24,6 +24,7 @@ public:
 
     void setName(string name);
     string name();
+    string oldName();
 
     void setDescription(string description);
     string description();
@@ -50,6 +51,7 @@ public:
 private:
     uint32_t _id;
     string _name;
+    string _oldName;
 
     STDoneType _done;
 

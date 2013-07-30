@@ -55,7 +55,8 @@ uint32_t SimpleTaskManager::addTask(SimpleTask *task)
             task->setManager(this);
         }
     }
-    else
+
+    if(!nid)
     {
         nid = this->getFreeId();
         if(nid)

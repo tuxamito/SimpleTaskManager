@@ -16,6 +16,7 @@ mainScreen::mainScreen(QWidget *parent) :
 
     //Set variables
     _staw = NULL;
+    _stiw = NULL;
 
     //Create directory where data is stored if
     //it doesn't exist
@@ -29,8 +30,8 @@ mainScreen::mainScreen(QWidget *parent) :
 
     //Create the Permanent Windows
     _stlw = new SimpleTaskListWindow(_stm, this);
-
     connect(_stlw, SIGNAL(newTask()), this, SLOT(showAddTask()));
+    connect(_stlw, SIGNAL(showTaskInfo(simpleTaskListWidget*)), this, SLOT(showTaskInfo(simpleTaskListWidget*)));
 
     //Show the default Window
     this->showTaskList();
@@ -78,12 +79,31 @@ void mainScreen::showAddTask()
     _staw = nt;
 }
 
+void mainScreen::showTaskInfo(simpleTaskListWidget* tw)
+{
+    SimpleTaskInfoWindow *ti = new SimpleTaskInfoWindow(tw);
+    ti->setAttribute(Qt::WA_DeleteOnClose);
+
+    //connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
+    connect(ti, SIGNAL(destroyed()), this, SLOT(showTaskList()));
+
+    ui->layout->removeWidget(_stlw);
+    _stlw->setHidden(true);
+    ui->layout->addWidget(ti);
+    _stiw = ti;
+}
+
 void mainScreen::showTaskList()
 {
     if(_staw)
     {
         ui->layout->removeWidget(_staw);
         _staw = NULL;
+    }
+    else if (_stiw)
+    {
+        ui->layout->removeWidget(_stiw);
+        _stiw = NULL;
     }
 
     ui->layout->addWidget(_stlw);

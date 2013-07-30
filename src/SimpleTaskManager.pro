@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     simpletaskmanager.cpp \
     simpletaskoperations.cpp \
     simpletaskaddwindow.cpp \
-    simpletasklistwindow.cpp
+    simpletasklistwindow.cpp \
+    simpletaskinfowindow.cpp
 
 HEADERS  += mainscreen.h \
     simpletask.h \
@@ -29,12 +30,14 @@ HEADERS  += mainscreen.h \
     simpletaskmanager.h \
     simpletaskoperations.h \
     simpletaskaddwindow.h \
-    simpletasklistwindow.h
+    simpletasklistwindow.h \
+    simpletaskinfowindow.h
 
 FORMS    += mainscreen.ui \
     simpletasklistwidget.ui \
     simpletaskaddwindow.ui \
-    simpletasklistwindow.ui
+    simpletasklistwindow.ui \
+    simpletaskinfowindow.ui
 
 CONFIG += mobility
 MOBILITY = 

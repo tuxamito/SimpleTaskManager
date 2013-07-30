@@ -37,9 +37,11 @@ private slots:
     void setExpanded(bool);
     void setExpandedToggle();
     void deleteTask();
+    void showOptions();
 
 signals:
     void deleteTask(simpleTaskListWidget *);
+    void showInfo(simpleTaskListWidget *);
 
 private:
     bool event(QEvent *event);

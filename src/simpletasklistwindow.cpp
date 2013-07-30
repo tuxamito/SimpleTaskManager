@@ -8,8 +8,6 @@
 #include <QDebug>
 
 #include "simpletaskaddwindow.h"
-
-#include "addtaskdialog.h"
 #include "simpletaskoperations.h"
 
 SimpleTaskListWindow::SimpleTaskListWindow(SimpleTaskManager *stm, QWidget *parent) :
@@ -60,7 +58,13 @@ void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
 
     nt->setTask(task);
 
+    connect(nt, SIGNAL(showInfo(simpleTaskListWidget*)), this, SLOT(showInfo(simpleTaskListWidget*)));
     connect(nt, SIGNAL(deleteTask(simpleTaskListWidget*)), this, SLOT(deleteTask(simpleTaskListWidget*)));
+}
+
+void SimpleTaskListWindow::showInfo(simpleTaskListWidget *tw)
+{
+    emit showTaskInfo(tw);
 }
 
 void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)

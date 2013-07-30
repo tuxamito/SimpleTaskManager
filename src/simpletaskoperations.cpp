@@ -59,8 +59,30 @@ QString STGetTaskFileName(string dir, SimpleTask *task)
     return QString(_dir) + "/" + QString(QString::number(task->id()) + "-" + task->name().c_str()) + ".stb";
 }
 
+QString STGetTaskFileOldName(string dir, SimpleTask *task)
+{
+    if(task->oldName() != "")
+    {
+        QString _dir(dir.c_str());
+        if(_dir == "")
+            _dir = ".";
+
+        return QString(_dir) + "/" + QString(QString::number(task->id()) + "-" + task->oldName().c_str()) + ".stb";
+    }
+    else
+    {
+        return "";
+    }
+}
+
 void STSaveToFile(string dir, SimpleTask *task)
 {
+    QString oldName = STGetTaskFileOldName(dir, task);
+    if(oldName != "")
+    {
+        QFile::remove(oldName);
+    }
+
     QByteArray data = STToBinary(task);
     QFile f(STGetTaskFileName(dir, task));
     f.open(QIODevice::Truncate | QIODevice::WriteOnly);

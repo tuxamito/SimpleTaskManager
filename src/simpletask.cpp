@@ -9,6 +9,7 @@ SimpleTask::SimpleTask()
 {
     _id = 0;
     _name = "";
+    _oldName = "";
     _done = NOTDONE;
     _father = NULL;
     _manager = NULL;
@@ -35,6 +36,7 @@ inline void SimpleTask::setModified()
 void SimpleTask::setSaved()
 {
     _modified = false;
+    _oldName = "";
 
     for(auto i = _subTasks.begin(); i != _subTasks.end(); ++i)
     {
@@ -61,12 +63,21 @@ uint32_t SimpleTask::id()
 void SimpleTask::setName(string name)
 {
     _name = name;
+
+    if(_oldName == "")
+        _oldName = _name;
+
     this->setModified();
 }
 
 string SimpleTask::name()
 {
     return _name;
+}
+
+string SimpleTask::oldName()
+{
+    return _oldName;
 }
 
 void SimpleTask::setDescription(string description)

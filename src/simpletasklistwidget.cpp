@@ -189,3 +189,8 @@ void simpleTaskListWidget::deleteTask()
 {
     emit deleteTask(this);
 }
+
+void simpleTaskListWidget::showOptions()
+{
+    emit showInfo(this);
+}

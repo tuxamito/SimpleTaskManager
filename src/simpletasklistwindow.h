@@ -29,9 +29,11 @@ private slots:
     void showOptions();
     void addTask();
     void deleteTask(simpleTaskListWidget*);
+    void showInfo(simpleTaskListWidget *);
 
 signals:
     void newTask();
+    void showTaskInfo(simpleTaskListWidget*);
 
 private:
     Ui::SimpleTaskListWindow *ui;
