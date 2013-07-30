@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>271</width>
+    <width>262</width>
     <height>27</height>
    </rect>
   </property>
@@ -36,6 +36,22 @@
     <number>0</number>
    </property>
    <item>
+    <spacer name="spacer3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>5</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
     <widget class="QCheckBox" name="checkDone">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -50,7 +66,7 @@
       </size>
      </property>
      <property name="text">
-      <string/>
+      <string> </string>
      </property>
     </widget>
    </item>

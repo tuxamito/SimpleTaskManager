@@ -20,14 +20,25 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     _menuPos.setY(0);
 
 #ifdef ANDROID
-    ui->buttonOptions->setIconSize(QSize(32, 32));
+    QSize iSize(32, 32);
 
-    //ui->label->setMinimumHeight(ui->label->height() + 10);
-
-    int size = ui->label->height() - 4;
+    int size = this->height() + 10;
     QString style("QCheckBox::indicator { width: " + QString::number(size) + "px; height: " + QString::number(size) + "px; }");
     ui->checkDone->setStyleSheet(style);
+
+    ui->spacer1->changeSize(10, 5);
+    ui->spacer2->changeSize(10, 5);
+    ui->spacer3->changeSize(10, 5);
+#else
+    QSize iSize(16, 16);
+    ui->spacer1->changeSize(5, 5);
+    ui->spacer2->changeSize(5, 5);
+    ui->spacer3->changeSize(0, 5);
 #endif
+
+    ui->buttonOptions->setIconSize(iSize);
+    ui->buttonExpand->setIconSize(iSize);
+    ui->buttonDelete->setIconSize(iSize);
 
     this->redraw();
 }
@@ -73,18 +84,11 @@ bool simpleTaskListWidget::mouseEvent(QMouseEvent *event)
 
 bool simpleTaskListWidget::gestureEvent(QGestureEvent *event)
 {
-    qDebug() << "AAAAAA";
     if(const QGesture *g = event->gesture(Qt::TapAndHoldGesture))
     {
-        qDebug() << "BBBBBB";
         if (g->state() == Qt::GestureFinished)
         {
-           qDebug() << "CCCCCC";
             QPoint p = this->mapToGlobal(g->hotSpot().toPoint());
-
-            qDebug() << "POSf: " << g->hotSpot().x() << g->hotSpot().y();
-            qDebug() << "POSi: " << p.x() << p.y();
-
             showMenu(p.x(), p.y());
         }
     }
