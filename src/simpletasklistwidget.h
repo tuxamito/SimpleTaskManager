@@ -30,12 +30,12 @@ public:
 
 public slots:
     void redraw();
+    void deleteTask();
 
 private slots:
     void changeTaskDone(bool done);
     void setExpanded(bool);
     void setExpandedToggle();
-    void deleteTask();
     void showOptions();
 
 signals:
@@ -47,12 +47,11 @@ private:
     bool event(QEvent *event);
     bool mouseEvent(QMouseEvent *event);
     bool gestureEvent(QGestureEvent *event);
-
     void showMenu(int x, int y);
 
     Ui::simpleTaskListWidget *ui;
-    SimpleTask *_task;
 
+    SimpleTask *_task;
     QListWidgetItem *_qlwi;
 
     bool _expanded;

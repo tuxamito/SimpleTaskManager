@@ -26,6 +26,8 @@ private slots:
     void loadInitData();
 
     void showTaskInfo(simpleTaskListWidget*);
+    void showTaskInfoMenu(simpleTaskListWidget*);
+    void showAddSubTask(simpleTaskListWidget*);
     void showAddTask();
     void showTaskList();
     void showTaskListMenu(simpleTaskListWidget*);
@@ -42,6 +44,9 @@ private:
     SimpleTaskListWidgetMenu *_stmw;
 
     QGraphicsBlurEffect *_blur;
+
+    simpleTaskListWidget *_showTaskInfo;
+    simpleTaskListWidget *_showAddSubTask;
 };
 
 #endif // MAINSCREEN_H

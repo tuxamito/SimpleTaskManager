@@ -5,6 +5,7 @@
 
 #include <QDir>
 #include <QDirIterator>
+#include <QDebug>
 
 #define DATADIR "DATA"
 
@@ -20,6 +21,8 @@ mainScreen::mainScreen(QWidget *parent) :
     _stmw = NULL;
     _blur = new QGraphicsBlurEffect(this);
     _blur->setEnabled(false);
+    _showTaskInfo = NULL;
+    _showAddSubTask = NULL;
 
 #ifdef ANDROID
     _blur->setBlurRadius(5);
@@ -106,13 +109,25 @@ void mainScreen::showTaskInfo(simpleTaskListWidget* tw)
     _stiw = ti;
 }
 
-void mainScreen::showTaskListMenu(simpleTaskListWidget*)
+void mainScreen::showTaskInfoMenu(simpleTaskListWidget *tw)
 {
-    SimpleTaskListWidgetMenu *tm = new SimpleTaskListWidgetMenu();
+    _showTaskInfo = tw;
+}
+
+void mainScreen::showAddSubTask(simpleTaskListWidget *tw)
+{
+    _showAddSubTask = tw;
+}
+
+void mainScreen::showTaskListMenu(simpleTaskListWidget *tlw)
+{
+    SimpleTaskListWidgetMenu *tm = new SimpleTaskListWidgetMenu(tlw);
     tm->setAttribute(Qt::WA_DeleteOnClose);
 
     //connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
     connect(tm, SIGNAL(destroyed()), this, SLOT(showTaskList()));
+    connect(tm, SIGNAL(showTaskInfo(simpleTaskListWidget*)), this, SLOT(showTaskInfoMenu(simpleTaskListWidget*)));
+    connect(tm, SIGNAL(showTaskAdd(simpleTaskListWidget*)), this, SLOT(showAddSubTask(simpleTaskListWidget*)));
 
     ui->layout->removeWidget(_stlw);
     _stlw->setHidden(false);
@@ -145,6 +160,18 @@ void mainScreen::showTaskList()
 
     ui->layout->addWidget(_stlw);
     _stlw->setHidden(false);
+
+    if(_showTaskInfo)
+    {
+        this->showTaskInfo(_showTaskInfo);
+        _showTaskInfo = NULL;
+    }
+    if(_showAddSubTask)
+    {
+        this->showAddTask();
+        //this->showTaskInfo(_showTaskInfo);
+        _showAddSubTask = NULL;
+    }
 }
 
 void mainScreen::createTask(QString name)
