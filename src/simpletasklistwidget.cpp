@@ -120,21 +120,21 @@ void simpleTaskListWidget::redraw()
         ui->checkDone->setChecked(_task->done());
         if(_task->done())
         {
-            QFont f = ui->label->font();
+            QFont f = ui->labelTaskName->font();
             f.setStrikeOut(true);
-            ui->label->setFont(f);
+            ui->labelTaskName->setFont(f);
         }
         else
         {
-            QFont f = ui->label->font();
+            QFont f = ui->labelTaskName->font();
             f.setStrikeOut(false);
-            ui->label->setFont(f);
+            ui->labelTaskName->setFont(f);
         }
-        ui->label->setText(QString::fromUtf8(_task->name().c_str()));
+        ui->labelTaskName->setText(QString::fromUtf8(_task->name().c_str()));
     }
     else
     {
-        ui->label->setText("");
+        ui->labelTaskName->setText("");
         ui->checkDone->setChecked(false);
     }
 
