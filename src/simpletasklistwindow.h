@@ -20,6 +20,7 @@ public:
     
 public slots:
     void addTaskToList(SimpleTask* task);
+    void setCurrent(int row);
     void update();
 
 protected:

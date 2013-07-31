@@ -138,6 +138,7 @@ void mainScreen::showTaskList()
     else if(_stmw)
     {
         ui->layout->removeWidget(_stmw);
+        _stlw->setCurrent(-1);
         _blur->setEnabled(false);
         _stmw = NULL;
     }

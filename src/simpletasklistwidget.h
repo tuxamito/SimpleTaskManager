@@ -26,7 +26,6 @@ public:
     SimpleTask *task();
 
     bool expanded();
-
     QListWidgetItem *myQLWI();
 
 public slots:
@@ -54,7 +53,7 @@ private:
     Ui::simpleTaskListWidget *ui;
     SimpleTask *_task;
 
-    QListWidgetItem * _qlwi;
+    QListWidgetItem *_qlwi;
 
     bool _expanded;
 

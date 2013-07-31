@@ -65,6 +65,7 @@ void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
 
 void SimpleTaskListWindow::showMenu(simpleTaskListWidget *tw)
 {
+    ui->listTasks->setCurrentItem(tw->myQLWI());
     emit showTaskMenu(tw);
 }
 
@@ -87,6 +88,11 @@ void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)
 
     delete tw;
     delete t;
+}
+
+void SimpleTaskListWindow::setCurrent(int row)
+{
+    ui->listTasks->setCurrentRow(row);
 }
 
 void SimpleTaskListWindow::closeEvent(QCloseEvent *event)
