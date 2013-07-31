@@ -18,6 +18,14 @@ mainScreen::mainScreen(QWidget *parent) :
     _staw = NULL;
     _stiw = NULL;
     _stmw = NULL;
+    _blur = new QGraphicsBlurEffect(this);
+    _blur->setEnabled(false);
+
+#ifdef ANDROID
+    _blur->setBlurRadius(5);
+#else
+    _blur->setBlurRadius(2);
+#endif
 
     //Create directory where data is stored if
     //it doesn't exist
@@ -37,11 +45,14 @@ mainScreen::mainScreen(QWidget *parent) :
 
     //Show the default Window
     this->showTaskList();
+
+    _stlw->setGraphicsEffect(_blur);
 }
 
 mainScreen::~mainScreen()
 {
     delete ui;
+    delete _blur;
     delete _stm;
 }
 
@@ -105,6 +116,9 @@ void mainScreen::showTaskListMenu(simpleTaskListWidget*)
 
     ui->layout->removeWidget(_stlw);
     _stlw->setHidden(false);
+
+    _blur->setEnabled(true);
+
     ui->layout->addWidget(tm);
     _stmw = tm;
 }
@@ -124,6 +138,7 @@ void mainScreen::showTaskList()
     else if(_stmw)
     {
         ui->layout->removeWidget(_stmw);
+        _blur->setEnabled(false);
         _stmw = NULL;
     }
 

@@ -2,6 +2,7 @@
 #define MAINSCREEN_H
 
 #include <QWidget>
+#include <QGraphicsBlurEffect>
 
 #include "simpletaskmanager.h"
 #include "simpletasklistwindow.h"
@@ -39,6 +40,8 @@ private:
     SimpleTaskAddWindow *_staw;
     SimpleTaskInfoWindow *_stiw;
     SimpleTaskListWidgetMenu *_stmw;
+
+    QGraphicsBlurEffect *_blur;
 };
 
 #endif // MAINSCREEN_H
