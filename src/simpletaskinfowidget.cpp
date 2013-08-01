@@ -52,6 +52,8 @@ void SimpleTaskInfoWidget::accept()
     _st->setTimeDone(ui->dateTimeDone->dateTime().toTime_t());
     _st->setTimeDue(ui->dateTimeDue->dateTime().toTime_t());
 
+    _st->setPriority(ui->spinBoxPriority->value());
+
     emit closeInfoAccept();
 }
 
@@ -87,6 +89,8 @@ void SimpleTaskInfoWidget::loadInfo()
     {
         ui->dateTimeDue->setDateTime(QDateTime::fromTime_t(_st->timeDue()));
     }
+
+    ui->spinBoxPriority->setValue(_st->priority());
 }
 
 void SimpleTaskInfoWidget::changeTaskDone(bool done)

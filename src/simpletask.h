@@ -41,6 +41,9 @@ public:
     void setTimeDue(time_t timeDue);
     time_t timeDue();
 
+    void setPriority(int priority);
+    int priority();
+
     void setFather(SimpleTask *father);
     SimpleTask *father();
 
@@ -63,6 +66,8 @@ private:
     time_t _timeCreation;
     time_t _timeDone;
     time_t _timeDue;
+
+    int _priority;
 
     bool _modified;
     SimpleTask *_father;

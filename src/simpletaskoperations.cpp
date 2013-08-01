@@ -20,6 +20,7 @@ QString STToQString(SimpleTask *st)
     obj.insert("timeCreation", QJsonValue(QString::number(st->timeCreation())));
     obj.insert("timeDone", QJsonValue(QString::number(st->timeDone())));
     obj.insert("timeDue", QJsonValue(QString::number(st->timeDue())));
+    obj.insert("priority", QJsonValue(QString::number(st->priority())));
 
     doc.setObject(obj);
 
@@ -49,6 +50,7 @@ SimpleTask *STFromQString(QString st)
     _st->setTimeCreation(obj.value("timeCreation").toString().toULongLong());
     _st->setTimeDone(obj.value("timeDone").toString().toULongLong());
     _st->setTimeDue(obj.value("timeDue").toString().toULongLong());
+    _st->setPriority(obj.value("priority").toString().toInt());
 
     return _st;
 }

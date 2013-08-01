@@ -17,6 +17,7 @@ SimpleTask::SimpleTask()
     _timeCreation = 0;
     _timeDone = 0;
     _timeDue = 0;
+    _priority = 0;
 }
 
 SimpleTask::~SimpleTask()
@@ -136,6 +137,16 @@ void SimpleTask::setTimeDue(time_t timeDue)
 time_t SimpleTask::timeDue()
 {
     return _timeDue;
+}
+
+void SimpleTask::setPriority(int priority)
+{
+    _priority = priority;
+}
+
+int SimpleTask::priority()
+{
+    return _priority;
 }
 
 void SimpleTask::setFather(SimpleTask *father)
