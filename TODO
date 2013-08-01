@@ -1,8 +1,6 @@
 - Investigate issue with Android name modified tasks
-- Change how tasks are created
 - Add all information to the task info window
 - Modify Task widget for:
-  - Showing description
   - Allowing to use necessary buttons only
   - Show subtasks
 - Include due time

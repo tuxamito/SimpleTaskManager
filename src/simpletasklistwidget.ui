@@ -117,7 +117,7 @@
         <number>1</number>
        </property>
        <property name="text">
-        <string>This is a very very long description for testing</string>
+        <string/>
        </property>
        <property name="scaledContents">
         <bool>false</bool>

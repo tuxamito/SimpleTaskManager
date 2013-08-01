@@ -16,8 +16,6 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     ui->setupUi(this);
 
     this->grabGesture(Qt::TapAndHoldGesture);
-    _menuPos.setX(0);
-    _menuPos.setY(0);
 
 #ifdef ANDROID
     QSize iSize(32, 32);
@@ -70,11 +68,11 @@ bool simpleTaskListWidget::mouseEvent(QMouseEvent *event)
 {
     if(event->type() == QEvent::ContextMenu)
     {
-        showMenu(_menuPos.x(), _menuPos.y());
+        showMenu();
     }
     else if(event->type() == QEvent::MouseButtonPress)
     {
-        _menuPos = event->globalPos();
+        //Keep for future menu position...
     }
 
     event->accept();
@@ -88,8 +86,9 @@ bool simpleTaskListWidget::gestureEvent(QGestureEvent *event)
     {
         if (g->state() == Qt::GestureFinished)
         {
-            QPoint p = this->mapToGlobal(g->hotSpot().toPoint());
-            showMenu(p.x(), p.y());
+            //Keep in case menus work in android in the future...
+            //QPoint p = this->mapToGlobal(g->hotSpot().toPoint());
+            showMenu();
         }
     }
 
@@ -98,7 +97,7 @@ bool simpleTaskListWidget::gestureEvent(QGestureEvent *event)
     return true;
 }
 
-void simpleTaskListWidget::showMenu(int x, int y)
+void simpleTaskListWidget::showMenu()
 {
     emit showMenu(this);
 }
@@ -131,13 +130,14 @@ void simpleTaskListWidget::redraw()
             ui->labelTaskName->setFont(f);
         }
         ui->labelTaskName->setText(QString::fromUtf8(_task->name().c_str()));
+
+        this->changeDescription(QString::fromUtf8(_task->description().c_str()));
     }
     else
     {
         ui->labelTaskName->setText("");
         ui->checkDone->setChecked(false);
     }
-
 }
 
 void simpleTaskListWidget::setTask(SimpleTask *task)
@@ -189,4 +189,10 @@ void simpleTaskListWidget::deleteTask()
 void simpleTaskListWidget::showOptions()
 {
     emit showInfo(this);
+}
+
+void simpleTaskListWidget::changeDescription(QString description)
+{
+    ui->labelTaskDescription->setText(description.trimmed());
+    ui->labelTaskDescription->setVisible(description.trimmed() != "");
 }

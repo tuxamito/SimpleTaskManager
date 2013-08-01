@@ -7,6 +7,7 @@
 #include <QGestureEvent>
 #include <QMouseEvent>
 #include <QPoint>
+#include <QString>
 
 #include "simpletask.h"
 
@@ -38,6 +39,8 @@ private slots:
     void setExpandedToggle();
     void showOptions();
 
+    void changeDescription(QString description);
+
 signals:
     void deleteTask(simpleTaskListWidget *);
     void showInfo(simpleTaskListWidget *);
@@ -47,7 +50,7 @@ private:
     bool event(QEvent *event);
     bool mouseEvent(QMouseEvent *event);
     bool gestureEvent(QGestureEvent *event);
-    void showMenu(int x, int y);
+    void showMenu();
 
     Ui::simpleTaskListWidget *ui;
 
@@ -55,8 +58,6 @@ private:
     QListWidgetItem *_qlwi;
 
     bool _expanded;
-
-    QPoint _menuPos;
 };
 
 #endif // SIMPLETASKLISTWIDGET_H

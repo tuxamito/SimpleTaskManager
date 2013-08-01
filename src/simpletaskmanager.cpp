@@ -103,19 +103,21 @@ void SimpleTaskManager::saveAll()
         SimpleTask *t = i->second;
         if(t->modified())
         {
-            STSaveToFile(_dir, t);
-            t->setSaved();
+            this->saveTask(t);
         }
+    }
+}
+
+void SimpleTaskManager::saveTask(SimpleTask *task)
+{
+    if(task->name() != "")
+    {
+        STSaveToFile(_dir, task);
+        task->setSaved();
     }
 }
 
 vst_t SimpleTaskManager::currentTasks()
 {
     return _vst;
-}
-
-void SimpleTaskManager::saveTask(SimpleTask *task)
-{
-    STSaveToFile(_dir, task);
-    task->setSaved();
 }

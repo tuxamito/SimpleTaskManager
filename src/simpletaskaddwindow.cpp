@@ -1,21 +1,19 @@
 #include "simpletaskaddwindow.h"
 #include "ui_simpletaskaddwindow.h"
 
-SimpleTaskAddWindow::SimpleTaskAddWindow(QWidget *parent) :
+SimpleTaskAddWindow::SimpleTaskAddWindow(SimpleTask *st, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SimpleTaskAddWindow)
 {
     ui->setupUi(this);
+    _st = st;
 
-#ifdef ANDROID
-    this->setWindowOpacity(0.2);
-    ui->lineTaskName->setMinimumHeight(ui->lineTaskName->height() + 4);
-    //this->setMinimumHeight(this->height() + 10);
+    _iw = new SimpleTaskInfoWidget(_st, this);
+    _iw->setHeading(tr("Add New Task"));
+    connect(_iw, SIGNAL(closeInfoAccept()), this, SLOT(acceptTask()));
+    connect(_iw, SIGNAL(closeInfo()), this, SLOT(notAcceptTask()));
 
-    this->repaint();
-#else
-    this->setWindowOpacity(1.0);
-#endif
+    ui->layout->addWidget(_iw);
 }
 
 SimpleTaskAddWindow::~SimpleTaskAddWindow()
@@ -25,7 +23,12 @@ SimpleTaskAddWindow::~SimpleTaskAddWindow()
 
 void SimpleTaskAddWindow::acceptTask()
 {
-    emit newTask(ui->lineTaskName->text());
+    emit newTask(_st);
+    this->close();
+}
 
+void SimpleTaskAddWindow::notAcceptTask()
+{
+    delete _st;
     this->close();
 }

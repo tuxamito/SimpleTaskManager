@@ -32,7 +32,7 @@ private slots:
     void showTaskList();
     void showTaskListMenu(simpleTaskListWidget*);
 
-    void createTask(QString);
+    void createTask(SimpleTask*);
 
 private:
     Ui::mainScreen *ui;

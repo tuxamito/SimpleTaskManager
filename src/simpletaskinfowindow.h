@@ -5,6 +5,7 @@
 
 #include "simpletask.h"
 #include "simpletasklistwidget.h"
+#include "simpletaskinfowidget.h"
 
 namespace Ui {
 class SimpleTaskInfoWindow;
@@ -24,8 +25,8 @@ private slots:
 private:
     Ui::SimpleTaskInfoWindow *ui;
 
-    void loadInfo();
     simpleTaskListWidget *_tw;
+    SimpleTaskInfoWidget *_iw;
 };
 
 #endif // SIMPLETASKINFOWINDOW_H

@@ -83,10 +83,11 @@ void mainScreen::loadInitData()
 
 void mainScreen::showAddTask()
 {
-    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow();
+    SimpleTask *st = new SimpleTask;
+    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow(st);
 
     nt->setAttribute(Qt::WA_DeleteOnClose);
-    connect(nt, SIGNAL(newTask(QString)), this, SLOT(createTask(QString)));
+    connect(nt, SIGNAL(newTask(SimpleTask*)), this, SLOT(createTask(SimpleTask*)));
     connect(nt, SIGNAL(destroyed()), this, SLOT(showTaskList()));
 
     ui->layout->removeWidget(_stlw);
@@ -174,11 +175,8 @@ void mainScreen::showTaskList()
     }
 }
 
-void mainScreen::createTask(QString name)
+void mainScreen::createTask(SimpleTask *st)
 {
-    SimpleTask *st = new SimpleTask;
-    st->setName(name.toUtf8().constData());
-
     _stm->addTask(st);
     st->setModified();
     _stlw->addTaskToList(st);
