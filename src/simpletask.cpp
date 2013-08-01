@@ -14,6 +14,9 @@ SimpleTask::SimpleTask()
     _father = NULL;
     _manager = NULL;
     _modified = false;
+    _timeCreation = 0;
+    _timeDone = 0;
+    _timeDue = 0;
 }
 
 SimpleTask::~SimpleTask()
@@ -122,6 +125,17 @@ void SimpleTask::setTimeDone(time_t timeDone)
 time_t SimpleTask::timeDone()
 {
     return _timeDone;
+}
+
+void SimpleTask::setTimeDue(time_t timeDue)
+{
+    _timeDone = timeDue;
+    this->setModified();
+}
+
+time_t SimpleTask::timeDue()
+{
+    return _timeDue;
 }
 
 void SimpleTask::setFather(SimpleTask *father)

@@ -20,7 +20,7 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
 #ifdef ANDROID
     QSize iSize(32, 32);
 
-    int size = this->height() + 10;
+    int size = this->height() + 8;
     QString style("QCheckBox::indicator { width: " + QString::number(size) + "px; height: " + QString::number(size) + "px; }");
     ui->checkDone->setStyleSheet(style);
 

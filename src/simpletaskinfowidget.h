@@ -26,6 +26,7 @@ private slots:
     void accept();
     void cancel();
     void loadInfo();
+    void changeTaskDone(bool done);
 
 signals:
     void closeInfo();

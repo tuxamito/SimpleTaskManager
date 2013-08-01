@@ -38,6 +38,9 @@ public:
     void setTimeDone(time_t timeDone);
     time_t timeDone();
 
+    void setTimeDue(time_t timeDue);
+    time_t timeDue();
+
     void setFather(SimpleTask *father);
     SimpleTask *father();
 
@@ -59,6 +62,7 @@ private:
 
     time_t _timeCreation;
     time_t _timeDone;
+    time_t _timeDue;
 
     bool _modified;
     SimpleTask *_father;
