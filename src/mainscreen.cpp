@@ -17,6 +17,7 @@ mainScreen::mainScreen(QWidget *parent) :
 
     //Set variables
     _staw = NULL;
+    _stsw = NULL;
     _stiw = NULL;
     _stmw = NULL;
     _blur = new QGraphicsBlurEffect(this);
@@ -97,19 +98,18 @@ void mainScreen::showAddTask()
 }
 
 //WORK HERE!
-void mainScreen::showAddSubTask()
+void mainScreen::showAddSubTaskToTask(simpleTaskListWidget* tw)
 {
-    SimpleTask *st = new SimpleTask;
-    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow(st);
+    SimpleTaskAddSubTaskWindow *nt = new SimpleTaskAddSubTaskWindow(tw);
 
     nt->setAttribute(Qt::WA_DeleteOnClose);
-    connect(nt, SIGNAL(newTask(SimpleTask*)), this, SLOT(createTask(SimpleTask*)));
+    connect(nt, SIGNAL(newSubTask(simpleTaskListWidget*)), this, SLOT(createSubTask(simpleTaskListWidget*)));
     connect(nt, SIGNAL(destroyed()), this, SLOT(showTaskList()));
 
     ui->layout->removeWidget(_stlw);
     _stlw->setHidden(true);
     ui->layout->addWidget(nt);
-    _staw = nt;
+    _stsw = nt;
 }
 
 void mainScreen::showTaskInfo(simpleTaskListWidget* tw)
@@ -162,6 +162,11 @@ void mainScreen::showTaskList()
         ui->layout->removeWidget(_staw);
         _staw = NULL;
     }
+    else if(_stsw)
+    {
+        ui->layout->removeWidget(_stsw);
+        _stsw = NULL;
+    }
     else if(_stiw)
     {
         ui->layout->removeWidget(_stiw);
@@ -185,7 +190,7 @@ void mainScreen::showTaskList()
     }
     if(_showAddSubTask)
     {
-        this->showAddSubTask();
+        this->showAddSubTaskToTask(_showAddSubTask);
         _showAddSubTask = NULL;
     }
 }
@@ -195,4 +200,9 @@ void mainScreen::createTask(SimpleTask *st)
     _stm->addTask(st);
     st->setModified();
     _stlw->addTaskToList(st);
+}
+
+void mainScreen::createSubTask(simpleTaskListWidget*)
+{
+    _stlw->update();
 }

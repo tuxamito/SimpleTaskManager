@@ -7,6 +7,7 @@
 #include "simpletaskmanager.h"
 #include "simpletasklistwindow.h"
 #include "simpletaskaddwindow.h"
+#include "simpletaskaddsubtaskwindow.h"
 #include "simpletaskinfowindow.h"
 #include "simpletasklistwidgetmenu.h"
 
@@ -28,12 +29,13 @@ private slots:
     void showTaskInfo(simpleTaskListWidget*);
     void showTaskInfoMenu(simpleTaskListWidget*);
     void showAddSubTask(simpleTaskListWidget*);
+    void showAddSubTaskToTask(simpleTaskListWidget*);
     void showAddTask();
-    void showAddSubTask();
     void showTaskList();
     void showTaskListMenu(simpleTaskListWidget*);
 
     void createTask(SimpleTask*);
+    void createSubTask(simpleTaskListWidget*);
 
 private:
     Ui::mainScreen *ui;
@@ -41,6 +43,7 @@ private:
     SimpleTaskListWindow *_stlw;
     SimpleTaskManager *_stm;
     SimpleTaskAddWindow *_staw;
+    SimpleTaskAddSubTaskWindow *_stsw;
     SimpleTaskInfoWindow *_stiw;
     SimpleTaskListWidgetMenu *_stmw;
 
