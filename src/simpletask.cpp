@@ -18,6 +18,9 @@ SimpleTask::SimpleTask()
     _timeDone = 0;
     _timeDue = 0;
     _priority = 0;
+    _level = 0;
+
+    _subTasks.clear();
 }
 
 SimpleTask::~SimpleTask()
@@ -44,7 +47,7 @@ void SimpleTask::setSaved()
 
     for(auto i = _subTasks.begin(); i != _subTasks.end(); ++i)
     {
-        (*i)->setSaved();
+        (*i).second->setSaved();
     }
 }
 
@@ -139,6 +142,11 @@ time_t SimpleTask::timeDue()
     return _timeDue;
 }
 
+unsigned int SimpleTask::level()
+{
+    return _level;
+}
+
 void SimpleTask::setPriority(int priority)
 {
     _priority = priority;
@@ -152,6 +160,7 @@ int SimpleTask::priority()
 void SimpleTask::setFather(SimpleTask *father)
 {
     _father = father;
+    this->_level = father->level();
     this->setModified();
 }
 
@@ -170,7 +179,58 @@ SimpleTaskManager *SimpleTask::manager()
     return _manager;
 }
 
+uint32_t SimpleTask::getFreeId()
+{
+    if(_manager)
+    {
+        return _manager->getFreeId();
+    }
+    else if(_father)
+    {
+        return _father->getFreeId();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void SimpleTask::freeId(uint32_t id)
+{
+    if(_manager)
+    {
+        _manager->freeId(id);
+    }
+    else if(_father)
+    {
+        _father->freeId(id);
+    }
+}
+
+void SimpleTask::addSubTask(SimpleTask *task)
+{
+    task->setId(this->getFreeId());
+    task->setFather(this);
+    this->_subTasks.insert(vst_t::value_type(task->id(), task));
+    this->setModified();
+}
+
+void SimpleTask::removeSubTask(uint32_t id)
+{
+    auto elem = _subTasks.find(id);
+    if(elem != _subTasks.end())
+    {
+        _subTasks.erase(elem);
+        this->freeId(id);
+    }
+}
+
 bool SimpleTask::modified()
 {
     return _modified;
+}
+
+vst_t* SimpleTask::getSubTasks()
+{
+    return &_subTasks;
 }

@@ -29,6 +29,7 @@ private slots:
     void showTaskInfoMenu(simpleTaskListWidget*);
     void showAddSubTask(simpleTaskListWidget*);
     void showAddTask();
+    void showAddSubTask();
     void showTaskList();
     void showTaskListMenu(simpleTaskListWidget*);
 

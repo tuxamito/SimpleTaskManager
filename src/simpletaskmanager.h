@@ -24,6 +24,8 @@ public:
     string saveDir();
 
     vst_t currentTasks();
+    uint32_t getFreeId();
+    void freeId(uint32_t id);
 
 private:
     vst_t _vst;
@@ -31,7 +33,6 @@ private:
 
     string _dir;
 
-    uint32_t getFreeId();
     bool findId(uint32_t id);
 };
 

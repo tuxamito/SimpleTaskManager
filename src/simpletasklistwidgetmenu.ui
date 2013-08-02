@@ -94,7 +94,7 @@
      <item row="0" column="1">
       <widget class="QPushButton" name="buttonAddTask">
        <property name="text">
-        <string>Add Task</string>
+        <string>Add SubTask</string>
        </property>
       </widget>
      </item>

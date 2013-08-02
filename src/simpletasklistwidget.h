@@ -57,6 +57,8 @@ private:
     SimpleTask *_task;
     QListWidgetItem *_qlwi;
 
+    unsigned int _subTaskLevel;
+
     bool _expanded;
 };
 

@@ -2,9 +2,13 @@
 #define SIMPLETASK_H
 
 #include <string>
-#include <vector>
 #include <ctime>
 #include <cstdint>
+#include <unordered_map>
+
+class SimpleTask;
+
+typedef std::unordered_map<uint32_t,SimpleTask*> vst_t;
 
 enum STDoneType {NOTDONE, DONE};
 class SimpleTaskManager;
@@ -47,12 +51,22 @@ public:
     void setFather(SimpleTask *father);
     SimpleTask *father();
 
-    void setManager(SimpleTaskManager *);
+    void setManager(SimpleTaskManager *manager);
     SimpleTaskManager *manager();
+
+    void addSubTask(SimpleTask *task);
+    void removeSubTask(uint32_t id);
+
+    uint32_t getFreeId();
+    void freeId(uint32_t id);
+
+    vst_t* getSubTasks();
 
     void setModified();
     bool modified();
     void setSaved();
+
+    unsigned int level();
 
 private:
     uint32_t _id;
@@ -69,11 +83,13 @@ private:
 
     int _priority;
 
+    unsigned int _level;
+
     bool _modified;
     SimpleTask *_father;
     SimpleTaskManager *_manager;
 
-    vector<class SimpleTask*> _subTasks;
+    vst_t _subTasks;
 };
 
 #endif // SIMPLETASK_H

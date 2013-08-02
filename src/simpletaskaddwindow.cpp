@@ -19,6 +19,7 @@ SimpleTaskAddWindow::SimpleTaskAddWindow(SimpleTask *st, QWidget *parent) :
 SimpleTaskAddWindow::~SimpleTaskAddWindow()
 {
     delete ui;
+    delete _iw;
 }
 
 void SimpleTaskAddWindow::acceptTask()

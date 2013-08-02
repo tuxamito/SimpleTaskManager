@@ -121,3 +121,8 @@ vst_t SimpleTaskManager::currentTasks()
 {
     return _vst;
 }
+
+void SimpleTaskManager::freeId(uint32_t id)
+{
+    _vui.erase(id);
+}

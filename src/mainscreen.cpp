@@ -96,6 +96,22 @@ void mainScreen::showAddTask()
     _staw = nt;
 }
 
+//WORK HERE!
+void mainScreen::showAddSubTask()
+{
+    SimpleTask *st = new SimpleTask;
+    SimpleTaskAddWindow *nt = new SimpleTaskAddWindow(st);
+
+    nt->setAttribute(Qt::WA_DeleteOnClose);
+    connect(nt, SIGNAL(newTask(SimpleTask*)), this, SLOT(createTask(SimpleTask*)));
+    connect(nt, SIGNAL(destroyed()), this, SLOT(showTaskList()));
+
+    ui->layout->removeWidget(_stlw);
+    _stlw->setHidden(true);
+    ui->layout->addWidget(nt);
+    _staw = nt;
+}
+
 void mainScreen::showTaskInfo(simpleTaskListWidget* tw)
 {
     SimpleTaskInfoWindow *ti = new SimpleTaskInfoWindow(tw);
@@ -169,8 +185,7 @@ void mainScreen::showTaskList()
     }
     if(_showAddSubTask)
     {
-        this->showAddTask();
-        //this->showTaskInfo(_showTaskInfo);
+        this->showAddSubTask();
         _showAddSubTask = NULL;
     }
 }

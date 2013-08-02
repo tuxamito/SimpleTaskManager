@@ -10,6 +10,7 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     ui(new Ui::simpleTaskListWidget)
 {
     _task = NULL;
+    _subTaskLevel = 0;
     _expanded = false;
     _qlwi = qlwi;
 
@@ -130,8 +131,10 @@ void simpleTaskListWidget::redraw()
             ui->labelTaskName->setFont(f);
         }
         ui->labelTaskName->setText(QString::fromUtf8(_task->name().c_str()));
-
         this->changeDescription(QString::fromUtf8(_task->description().c_str()));
+        ui->buttonExpand->setEnabled(!_task->getSubTasks()->empty());
+
+        ui->spacerSubTask->changeSize(_task->level() * 10, 5);
     }
     else
     {
