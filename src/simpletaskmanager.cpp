@@ -126,3 +126,19 @@ void SimpleTaskManager::freeId(uint32_t id)
 {
     _vui.erase(id);
 }
+
+lst_t SimpleTaskManager::getTaskList()
+{
+    lst_t list;
+
+    for(auto i = _vst.begin(); i != _vst.end(); ++i)
+    {
+        SimpleTask *t = i->second;
+        list.push_back(t);
+
+        lst_t _list = t->getSubTaskList();
+        list.merge(_list);
+    }
+
+    return list;
+}

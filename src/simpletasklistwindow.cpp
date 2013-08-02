@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QDebug>
 
+#include "simpletaskcommon.h"
 #include "simpletaskaddwindow.h"
 #include "simpletaskoperations.h"
 
@@ -27,12 +28,14 @@ SimpleTaskListWindow::~SimpleTaskListWindow()
 
 void SimpleTaskListWindow::update()
 {
-    vst_t tasks = _stm->currentTasks();
+    ui->listTasks->clear();
+    lst_t list = _stm->getTaskList();
 
-    for(auto i = tasks.begin(); i != tasks.end(); ++i)
+    for(auto i = list.begin(); i != list.end(); ++i)
     {
-        SimpleTask *t = i->second;
-        this->addTaskToList(t);
+        SimpleTask *t = (*i);
+        this->addTaskToView(t);
+        qDebug() << t->name().c_str();
     }
 }
 
@@ -46,7 +49,7 @@ void SimpleTaskListWindow::addTask()
     emit newTask();
 }
 
-void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
+void SimpleTaskListWindow::addTaskToView(SimpleTask* task)
 {
     QListWidgetItem *nw = new QListWidgetItem;
     simpleTaskListWidget *nt = new simpleTaskListWidget(nw);

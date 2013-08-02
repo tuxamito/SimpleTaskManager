@@ -157,10 +157,22 @@ int SimpleTask::priority()
     return _priority;
 }
 
+void SimpleTask::updateLevel()
+{
+    _level = _father->level() +1;
+}
+
 void SimpleTask::setFather(SimpleTask *father)
 {
     _father = father;
-    this->_level = father->level();
+    updateLevel();
+
+    for(auto i = _subTasks.begin(); i != _subTasks.end(); ++i)
+    {
+        SimpleTask *t = i->second;
+        t->updateLevel();
+    }
+
     this->setModified();
 }
 
@@ -233,4 +245,20 @@ bool SimpleTask::modified()
 vst_t* SimpleTask::getSubTasks()
 {
     return &_subTasks;
+}
+
+lst_t SimpleTask::getSubTaskList()
+{
+    lst_t list;
+
+    for(auto i = _subTasks.begin(); i != _subTasks.end(); ++i)
+    {
+        SimpleTask *t = i->second;
+        list.push_back(t);
+
+        lst_t _list = t->getSubTaskList();
+        list.merge(_list);
+    }
+
+    return list;
 }

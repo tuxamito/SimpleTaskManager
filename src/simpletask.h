@@ -3,17 +3,8 @@
 
 #include <string>
 #include <ctime>
-#include <cstdint>
-#include <unordered_map>
 
-class SimpleTask;
-
-typedef std::unordered_map<uint32_t,SimpleTask*> vst_t;
-
-enum STDoneType {NOTDONE, DONE};
-class SimpleTaskManager;
-
-using namespace std;
+#include "simpletaskcommon.h"
 
 class SimpleTask
 {
@@ -66,7 +57,10 @@ public:
     bool modified();
     void setSaved();
 
+    void updateLevel();
     unsigned int level();
+
+    lst_t getSubTaskList();
 
 private:
     uint32_t _id;

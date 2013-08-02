@@ -199,7 +199,7 @@ void mainScreen::createTask(SimpleTask *st)
 {
     _stm->addTask(st);
     st->setModified();
-    _stlw->addTaskToList(st);
+    _stlw->update();
 }
 
 void mainScreen::createSubTask(simpleTaskListWidget*)

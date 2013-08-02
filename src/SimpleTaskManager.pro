@@ -25,8 +25,7 @@ SOURCES += main.cpp\
     simpletaskinfowindow.cpp \
     simpletasklistwidgetmenu.cpp \
     simpletaskinfowidget.cpp \
-    simpletaskaddsubtaskwindow.cpp \
-    simpletasklistwindowdata.cpp
+    simpletaskaddsubtaskwindow.cpp
 
 HEADERS  += mainscreen.h \
     simpletask.h \
@@ -39,7 +38,7 @@ HEADERS  += mainscreen.h \
     simpletasklistwidgetmenu.h \
     simpletaskinfowidget.h \
     simpletaskaddsubtaskwindow.h \
-    simpletasklistwindowdata.h
+    simpletaskcommon.h
 
 FORMS    += mainscreen.ui \
     simpletasklistwidget.ui \

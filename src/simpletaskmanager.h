@@ -3,10 +3,10 @@
 
 #include <unordered_set>
 #include <unordered_map>
+#include <list>
 
+#include "simpletaskcommon.h"
 #include "simpletask.h"
-
-typedef unordered_map<uint32_t,SimpleTask*> vst_t;
 
 class SimpleTaskManager
 {
@@ -26,6 +26,8 @@ public:
     vst_t currentTasks();
     uint32_t getFreeId();
     void freeId(uint32_t id);
+
+    lst_t getTaskList();
 
 private:
     vst_t _vst;

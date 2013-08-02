@@ -19,7 +19,7 @@ public:
     ~SimpleTaskListWindow();
     
 public slots:
-    void addTaskToList(SimpleTask* task);
+    void addTaskToView(SimpleTask* task);
     void setCurrent(int row);
     void update();
 
