@@ -55,7 +55,7 @@ void SimpleTaskListWindow::addTaskToList(SimpleTask* task)
     ui->listTasks->setItemWidget(nw, nt);
 
 #ifdef ANDROID
-    nw->setSizeHint(nt->sizeHint() + QSize(0, 20));
+    nw->setSizeHint(nt->sizeHint() + QSize(0, 18));
 #else
     nw->setSizeHint(nt->sizeHint());
 #endif
