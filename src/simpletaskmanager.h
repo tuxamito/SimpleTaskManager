@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <list>
 
+#include <QString>
+
 #include "simpletaskcommon.h"
 #include "simpletask.h"
 
@@ -28,6 +30,9 @@ public:
     void freeId(uint32_t id);
 
     lst_t getTaskList();
+
+    void loadInitData(QString dir);
+    void loadInitData();
 
 private:
     vst_t _vst;

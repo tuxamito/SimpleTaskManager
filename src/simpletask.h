@@ -62,6 +62,8 @@ public:
 
     lst_t getSubTaskList();
 
+    friend class SimpleTaskManager;
+
 private:
     uint32_t _id;
     string _name;

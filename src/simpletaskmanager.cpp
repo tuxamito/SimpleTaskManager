@@ -3,6 +3,10 @@
 
 #include <algorithm>
 
+#include <QDirIterator>
+#include <QFile>
+#include <QFileInfo>
+
 SimpleTaskManager::SimpleTaskManager()
 {
     _dir = "";
@@ -20,6 +24,33 @@ void SimpleTaskManager::setSaveDir(string dir)
 string SimpleTaskManager::saveDir()
 {
     return _dir;
+}
+
+void SimpleTaskManager::loadInitData(QString dir)
+{
+    QDirIterator *dirIt;
+    dirIt = new QDirIterator(dir, QDirIterator::NoIteratorFlags);
+
+    while (dirIt->hasNext())
+    {
+        dirIt->next();
+        QString _f = dirIt->filePath();
+        QFileInfo f(_f);
+
+        if(f.suffix() == "stb")
+        {
+            QFile dfile(dirIt->filePath());
+            dfile.open(QIODevice::ReadOnly);
+
+            SimpleTask *st = STFromBinary(dfile.readAll());
+            this->addTask(st);
+        }
+    }
+}
+
+void SimpleTaskManager::loadInitData()
+{
+    loadInitData(_dir.c_str());
 }
 
 bool SimpleTaskManager::findId(uint32_t id)

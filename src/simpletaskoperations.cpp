@@ -1,16 +1,17 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QJsonArray>
 #include <QByteArray>
 #include <QFile>
 
 #include <QDebug>
 
 #include "simpletaskoperations.h"
+#include "simpletaskcommon.h"
 
-QString STToQString(SimpleTask *st)
+QJsonObject STToJSON(SimpleTask *st)
 {
-    QJsonDocument doc;
     QJsonObject obj;
 
     obj.insert("id", QJsonValue(QString::number(st->id())));
@@ -22,6 +23,28 @@ QString STToQString(SimpleTask *st)
     obj.insert("timeDue", QJsonValue(QString::number(st->timeDue())));
     obj.insert("priority", QJsonValue(QString::number(st->priority())));
     obj.insert("level", QJsonValue(QString::number(st->level())));
+
+    return obj;
+}
+
+QString STToQString(SimpleTask *st)
+{
+    QJsonDocument doc;
+    QJsonObject obj;
+    QJsonArray subTasks;
+
+    obj = STToJSON(st);
+
+    //Add subtasks
+    vst_t *sts = st->getSubTasks();
+    for(auto i = sts->begin(); i != sts->end(); ++i)
+    {
+        SimpleTask *sub = i->second;
+        QJsonObject obj2 = STToJSON(sub);
+        subTasks.append(QJsonValue(obj2));
+    }
+
+    obj.insert("subTasks", QJsonValue(subTasks));
 
     doc.setObject(obj);
 

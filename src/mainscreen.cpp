@@ -62,24 +62,7 @@ mainScreen::~mainScreen()
 
 void mainScreen::loadInitData()
 {
-    QDirIterator *dirIt;
-    dirIt = new QDirIterator(_stm->saveDir().c_str(), QDirIterator::NoIteratorFlags);
-
-    while (dirIt->hasNext())
-    {
-        dirIt->next();
-        QString _f = dirIt->filePath();
-        QFileInfo f(_f);
-
-        if(f.suffix() == "stb")
-        {
-            QFile dfile(dirIt->filePath());
-            dfile.open(QIODevice::ReadOnly);
-
-            SimpleTask *st = STFromBinary(dfile.readAll());
-            _stm->addTask(st);
-        }
-    }
+    _stm->loadInitData();
 }
 
 void mainScreen::showAddTask()
