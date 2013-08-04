@@ -69,7 +69,7 @@ SimpleTask *STFromJSON(QJsonObject obj)
     _st->setTimeDone(obj.value("timeDone").toString().toULongLong());
     _st->setTimeDue(obj.value("timeDue").toString().toULongLong());
     _st->setPriority(obj.value("priority").toString().toInt());
-    _st->setPriority(obj.value("level").toString().toUInt());
+    _st->setLevel(obj.value("level").toString().toUInt());
 
     QJsonArray subTasks = obj.value("subTasks").toArray();
 
@@ -77,6 +77,7 @@ SimpleTask *STFromJSON(QJsonObject obj)
     {
         QJsonValue subTask = *i;
         SimpleTask *_subTask = STFromJSON(subTask.toObject());
+        //check check check
         _st->addSubTask(_subTask);
     }
 

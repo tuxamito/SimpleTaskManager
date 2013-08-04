@@ -147,9 +147,15 @@ unsigned int SimpleTask::level()
     return _level;
 }
 
+void SimpleTask::setLevel(unsigned int level)
+{
+    _level = level;
+}
+
 void SimpleTask::setPriority(int priority)
 {
     _priority = priority;
+    this->setModified();
 }
 
 int SimpleTask::priority()
@@ -221,6 +227,7 @@ void SimpleTask::freeId(uint32_t id)
 
 void SimpleTask::addSubTask(SimpleTask *task)
 {
+    //FIXME! do not modif task id if its free
     task->setId(this->getFreeId());
     task->setFather(this);
     this->_subTasks.insert(vst_t::value_type(task->id(), task));

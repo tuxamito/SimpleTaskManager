@@ -59,6 +59,7 @@ public:
 
     void updateLevel();
     unsigned int level();
+    void setLevel(unsigned int level);
 
     lst_t getSubTaskList();
 
