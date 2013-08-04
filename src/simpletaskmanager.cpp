@@ -167,8 +167,11 @@ lst_t SimpleTaskManager::getTaskList()
         SimpleTask *t = i->second;
         list.push_back(t);
 
-        lst_t _list = t->getSubTaskList();
-        list.merge(_list);
+        if(t->expanded())
+        {
+            lst_t _list = t->getSubTaskList();
+            list.merge(_list);
+        }
     }
 
     return list;

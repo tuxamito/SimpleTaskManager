@@ -111,9 +111,9 @@ QListWidgetItem *simpleTaskListWidget::myQLWI()
 void simpleTaskListWidget::redraw()
 {
     if(_expanded)
-        ui->buttonExpand->setIcon(QIcon(":/icons/arrow-up"));
-    else
         ui->buttonExpand->setIcon(QIcon(":/icons/arrow-down"));
+    else
+        ui->buttonExpand->setIcon(QIcon(":/icons/arrow-up"));
 
     if(_task)
     {
@@ -134,7 +134,7 @@ void simpleTaskListWidget::redraw()
         this->changeDescription(QString::fromUtf8(_task->description().c_str()));
         ui->buttonExpand->setEnabled(!_task->getSubTasks()->empty());
 
-        ui->spacerSubTask->changeSize(_task->level() * 10, 5);
+        ui->spacerSubTask->changeSize(_task->level() * 20, 5);
     }
     else
     {
@@ -146,6 +146,7 @@ void simpleTaskListWidget::redraw()
 void simpleTaskListWidget::setTask(SimpleTask *task)
 {
     _task = task;
+    this->_expanded = _task->expanded();
     this->redraw();
 }
 
@@ -162,7 +163,9 @@ bool simpleTaskListWidget::expanded()
 void simpleTaskListWidget::setExpanded(bool expanded)
 {
     _expanded = expanded;
+    _task->setExpanded(_expanded);
     this->redraw();
+    emit updateList();
 }
 
 void simpleTaskListWidget::setExpandedToggle()

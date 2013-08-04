@@ -63,6 +63,9 @@ public:
 
     lst_t getSubTaskList();
 
+    void setExpanded(bool extended);
+    bool expanded();
+
     friend class SimpleTaskManager;
 
 private:
@@ -71,7 +74,6 @@ private:
     string _oldName;
 
     STDoneType _done;
-
     string _description;
 
     time_t _timeCreation;
@@ -79,12 +81,13 @@ private:
     time_t _timeDue;
 
     int _priority;
-
     unsigned int _level;
 
     bool _modified;
     SimpleTask *_father;
     SimpleTaskManager *_manager;
+
+    bool _expanded;
 
     vst_t _subTasks;
 };

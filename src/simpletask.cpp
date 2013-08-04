@@ -20,6 +20,8 @@ SimpleTask::SimpleTask()
     _priority = 0;
     _level = 0;
 
+    _expanded = true;
+
     _subTasks.clear();
 }
 
@@ -195,6 +197,16 @@ void SimpleTask::setManager(SimpleTaskManager *manager)
 SimpleTaskManager *SimpleTask::manager()
 {
     return _manager;
+}
+
+void SimpleTask::setExpanded(bool expanded)
+{
+    _expanded = expanded;
+}
+
+bool SimpleTask::expanded()
+{
+    return _expanded;
 }
 
 uint32_t SimpleTask::getFreeId()

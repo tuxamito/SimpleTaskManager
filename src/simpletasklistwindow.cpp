@@ -35,7 +35,6 @@ void SimpleTaskListWindow::update()
     {
         SimpleTask *t = (*i);
         this->addTaskToView(t);
-        qDebug() << t->name().c_str();
     }
 }
 
@@ -68,6 +67,7 @@ void SimpleTaskListWindow::addTaskToView(SimpleTask* task)
     connect(nt, SIGNAL(showInfo(simpleTaskListWidget*)), this, SLOT(showInfo(simpleTaskListWidget*)));
     connect(nt, SIGNAL(deleteTask(simpleTaskListWidget*)), this, SLOT(deleteTask(simpleTaskListWidget*)));
     connect(nt, SIGNAL(showMenu(simpleTaskListWidget*)), this, SLOT(showMenu(simpleTaskListWidget*)));
+    connect(nt, SIGNAL(updateList()), this, SLOT(update()));
 }
 
 void SimpleTaskListWindow::showMenu(simpleTaskListWidget *tw)

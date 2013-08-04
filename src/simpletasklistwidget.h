@@ -45,6 +45,7 @@ signals:
     void deleteTask(simpleTaskListWidget *);
     void showInfo(simpleTaskListWidget *);
     void showMenu(simpleTaskListWidget *);
+    void updateList();
 
 private:
     bool event(QEvent *event);
