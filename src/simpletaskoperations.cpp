@@ -56,16 +56,10 @@ QByteArray STToBinary(SimpleTask *st)
     return qCompress(STToQString(st).toUtf8());
 }
 
-SimpleTask *STFromQString(QString st)
+SimpleTask *STFromJSON(QJsonObject obj)
 {
     SimpleTask *_st;
     _st = new SimpleTask;
-
-    QJsonDocument doc;
-    doc = QJsonDocument::fromJson(st.toUtf8());
-
-    QJsonObject obj;
-    obj = doc.object();
 
     _st->setName(obj.value("name").toString().toUtf8().constData());
     _st->setDescription(obj.value("description").toString().toUtf8().constData());
@@ -76,6 +70,28 @@ SimpleTask *STFromQString(QString st)
     _st->setTimeDue(obj.value("timeDue").toString().toULongLong());
     _st->setPriority(obj.value("priority").toString().toInt());
     _st->setPriority(obj.value("level").toString().toUInt());
+
+    QJsonArray subTasks = obj.value("subTasks").toArray();
+
+    for(auto i = subTasks.begin(); i != subTasks.end(); ++i)
+    {
+        QJsonValue subTask = *i;
+        SimpleTask *_subTask = STFromJSON(subTask.toObject());
+        _st->addSubTask(_subTask);
+    }
+
+    return _st;
+}
+
+SimpleTask *STFromQString(QString st)
+{
+    QJsonDocument doc;
+    doc = QJsonDocument::fromJson(st.toUtf8());
+
+    QJsonObject obj;
+    obj = doc.object();
+
+    SimpleTask *_st = STFromJSON(obj);
 
     return _st;
 }
