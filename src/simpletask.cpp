@@ -281,3 +281,8 @@ lst_t SimpleTask::getSubTaskList()
 
     return list;
 }
+
+void SimpleTask::subTasksFigures(int *number, int *done)
+{
+
+}

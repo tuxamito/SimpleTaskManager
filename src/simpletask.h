@@ -63,6 +63,8 @@ public:
 
     lst_t getSubTaskList();
 
+    void subTasksFigures(int *number, int *done);
+
     void setExpanded(bool extended);
     bool expanded();
 
