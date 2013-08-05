@@ -10,6 +10,7 @@
 #include "simpletaskaddsubtaskwindow.h"
 #include "simpletaskinfowindow.h"
 #include "simpletasklistwidgetmenu.h"
+#include "simpletask.h"
 
 namespace Ui {
 class mainScreen;

@@ -6,6 +6,7 @@
 #include <list>
 
 #include <QString>
+#include <QJsonObject>
 
 #include "simpletaskcommon.h"
 #include "simpletask.h"
@@ -26,6 +27,7 @@ public:
     string saveDir();
 
     vst_t currentTasks();
+    uint32_t getFreeIdAndReserve(uint32_t proposedID);
     uint32_t getFreeId();
     void freeId(uint32_t id);
 
@@ -34,7 +36,26 @@ public:
     void loadInitData(QString dir);
     void loadInitData();
 
+    //FROM OPERATIONS
+    QString STGetTaskFileName(string dir, SimpleTask *task);
+
 private:
+    //FROM OPERATIONS
+    QJsonObject STToJSON(SimpleTask *st);
+    SimpleTask *STFromJSON(QJsonObject obj, SimpleTask *father=NULL);
+
+    QString STToQString(SimpleTask *st);
+    QByteArray STToBinary(SimpleTask *st);
+
+    SimpleTask *STFromQString(QString st);
+    SimpleTask *STFromBinary(QByteArray st);
+
+    QString STGetTaskFileOldName(string dir, SimpleTask *task);
+    void STSaveToFile(string dir, SimpleTask *task);
+
+    int STDoneTypeToInt(STDoneType val);
+    STDoneType IntToSTDoneType(int val);
+
     vst_t _vst;
     unordered_set<uint32_t> _vui;
 

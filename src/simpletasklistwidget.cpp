@@ -200,11 +200,13 @@ void simpleTaskListWidget::changeTaskDone(bool done)
     }
 
     this->redraw();
+    emit updateList();
 }
 
 void simpleTaskListWidget::deleteTask()
 {
     emit deleteTask(this);
+    emit updateList();
 }
 
 void simpleTaskListWidget::showOptions()

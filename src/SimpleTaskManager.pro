@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     simpletask.cpp \
     simpletasklistwidget.cpp \
     simpletaskmanager.cpp \
-    simpletaskoperations.cpp \
     simpletaskaddwindow.cpp \
     simpletasklistwindow.cpp \
     simpletaskinfowindow.cpp \
@@ -31,7 +30,6 @@ HEADERS  += mainscreen.h \
     simpletask.h \
     simpletasklistwidget.h \
     simpletaskmanager.h \
-    simpletaskoperations.h \
     simpletaskaddwindow.h \
     simpletasklistwindow.h \
     simpletaskinfowindow.h \

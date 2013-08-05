@@ -91,6 +91,10 @@ void SimpleTaskInfoWidget::loadInfo()
     }
 
     ui->spinBoxPriority->setValue(_st->priority());
+
+#ifdef QT_DECLARATIVE_DEBUG
+    ui->labelDebug->setText("ID: " + QString::number(_st->id()));
+#endif
 }
 
 void SimpleTaskInfoWidget::changeTaskDone(bool done)

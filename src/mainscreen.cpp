@@ -1,8 +1,6 @@
 #include "mainscreen.h"
 #include "ui_mainscreen.h"
 
-#include "simpletaskoperations.h"
-
 #include <QDir>
 #include <QDirIterator>
 #include <QDebug>

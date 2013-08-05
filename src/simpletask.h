@@ -48,7 +48,7 @@ public:
     void addSubTask(SimpleTask *task);
     void removeSubTask(uint32_t id);
 
-    uint32_t getFreeId();
+    uint32_t getFreeId(uint32_t id);
     void freeId(uint32_t id);
 
     vst_t* getSubTasks();

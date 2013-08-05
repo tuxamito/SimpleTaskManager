@@ -9,7 +9,6 @@
 
 #include "simpletaskcommon.h"
 #include "simpletaskaddwindow.h"
-#include "simpletaskoperations.h"
 
 SimpleTaskListWindow::SimpleTaskListWindow(SimpleTaskManager *stm, QWidget *parent) :
     QWidget(parent),
@@ -85,7 +84,7 @@ void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)
 {
     SimpleTask *t = tw->task();
 
-    QFile f(STGetTaskFileName(_stm->saveDir().c_str(), t));
+    QFile f(_stm->STGetTaskFileName(_stm->saveDir().c_str(), t));
     if(f.exists())
         f.remove();
 

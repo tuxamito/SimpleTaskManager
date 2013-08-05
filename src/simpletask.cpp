@@ -1,5 +1,4 @@
 #include "simpletask.h"
-#include "simpletaskoperations.h"
 #include "simpletaskmanager.h"
 
 #include <QByteArray>
@@ -29,7 +28,7 @@ SimpleTask::~SimpleTask()
 {
 }
 
-inline void SimpleTask::setModified()
+void SimpleTask::setModified()
 {
     _modified = true;
     if(_father)
@@ -209,15 +208,16 @@ bool SimpleTask::expanded()
     return _expanded;
 }
 
-uint32_t SimpleTask::getFreeId()
+
+uint32_t SimpleTask::getFreeId(uint32_t id)
 {
     if(_manager)
     {
-        return _manager->getFreeId();
+        return _manager->getFreeIdAndReserve(id);
     }
     else if(_father)
     {
-        return _father->getFreeId();
+        return _father->getFreeId(id);
     }
     else
     {
@@ -239,9 +239,8 @@ void SimpleTask::freeId(uint32_t id)
 
 void SimpleTask::addSubTask(SimpleTask *task)
 {
-    //FIXME! do not modif task id if its free
-    task->setId(this->getFreeId());
     task->setFather(this);
+    task->setId(this->getFreeId(task->id()));
     this->_subTasks.insert(vst_t::value_type(task->id(), task));
     this->setModified();
 }
