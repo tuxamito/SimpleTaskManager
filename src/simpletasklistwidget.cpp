@@ -110,6 +110,10 @@ QListWidgetItem *simpleTaskListWidget::myQLWI()
 
 void simpleTaskListWidget::redraw()
 {
+    int nt = 0;
+    int nd = 0;
+    QString stringNTD;
+
     if(_expanded)
         ui->buttonExpand->setIcon(QIcon(":/icons/arrow-down"));
     else
@@ -130,7 +134,18 @@ void simpleTaskListWidget::redraw()
             f.setStrikeOut(false);
             ui->labelTaskName->setFont(f);
         }
-        ui->labelTaskName->setText(QString::fromUtf8(_task->name().c_str()));
+
+        _task->subTasksFigures(&nt, &nd);
+        if(nt > 0)
+        {
+            stringNTD = " (" + QString::number(nd) + "/" + QString::number(nt) + ")";
+        }
+        else
+        {
+            stringNTD = "";
+        }
+
+        ui->labelTaskName->setText(QString::fromUtf8(_task->name().c_str()) + stringNTD);
         this->changeDescription(QString::fromUtf8(_task->description().c_str()));
         ui->buttonExpand->setEnabled(!_task->getSubTasks()->empty());
 

@@ -284,5 +284,24 @@ lst_t SimpleTask::getSubTaskList()
 
 void SimpleTask::subTasksFigures(int *number, int *done)
 {
+    int _n = 0;
+    int _d = 0;
 
+    int _nS = 0;
+    int _nD = 0;
+
+    _n += _subTasks.size();
+
+    for(auto i = _subTasks.begin(); i != _subTasks.end(); ++i)
+    {
+        SimpleTask *t = i->second;
+        if(t->done())
+            ++_d;
+        t->subTasksFigures(&_nS, &_nD);
+        _n += _nS;
+        _d += _nD;
+    }
+
+    *number = _n;
+    *done = _d;
 }
