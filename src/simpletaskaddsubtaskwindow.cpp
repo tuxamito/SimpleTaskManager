@@ -26,8 +26,8 @@ SimpleTaskAddSubTaskWindow::~SimpleTaskAddSubTaskWindow()
 
 void SimpleTaskAddSubTaskWindow::acceptTask()
 {
-    emit newSubTask(_tw);
     _tw->task()->addSubTask(_st);
+    emit newSubTask(_tw);
     this->close();
 }
 

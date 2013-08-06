@@ -198,7 +198,7 @@ lst_t SimpleTaskManager::getTaskList()
         if(t->expanded())
         {
             lst_t _list = t->getSubTaskList();
-            list.merge(_list);
+            list.splice(list.end(), _list);
         }
     }
 
