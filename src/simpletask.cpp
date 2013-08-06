@@ -274,8 +274,11 @@ lst_t SimpleTask::getSubTaskList()
         SimpleTask *t = i->second;
         list.push_back(t);
 
-        lst_t _list = t->getSubTaskList();
-        list.merge(_list);
+        if(t->expanded())
+        {
+            lst_t _list = t->getSubTaskList();
+            list.splice(list.end(), _list);
+        }
     }
 
     return list;
