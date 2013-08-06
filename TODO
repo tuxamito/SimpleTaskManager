@@ -1,10 +1,10 @@
 - Investigate issue with Android name modified tasks
-- Add all information to the task info window
+- Continue adding the task information
 - Modify Task widget for:
-  - Allowing to use necessary buttons only
-  - Show subtasks
-- Include due time
-- Include priority
-- Include completion percentage
+  - Show necessary buttons only
+  - Show priority
+  - Show completion status
+- Include active time
+- Improve date and time settings
 - Include types
 - Include recurrent tasks

@@ -139,10 +139,15 @@ void simpleTaskListWidget::redraw()
         if(nt > 0)
         {
             stringNTD = " (" + QString::number(nd) + "/" + QString::number(nt) + ")";
+            ui->progressBar->setMinimum(0);
+            ui->progressBar->setMaximum(nt);
+            ui->progressBar->setValue(nd);
+            ui->progressBar->setVisible(true);
         }
         else
         {
             stringNTD = "";
+            ui->progressBar->setVisible(false);
         }
 
         ui->labelTaskName->setText(QString::fromUtf8(_task->name().c_str()) + stringNTD);
