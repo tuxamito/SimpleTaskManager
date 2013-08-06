@@ -226,6 +226,7 @@ lst_t SimpleTaskManager::getTaskList()
 QJsonObject SimpleTaskManager::STToJSON(SimpleTask *st)
 {
     QJsonObject obj;
+    QJsonArray subTasks;
 
     obj.insert("id", QJsonValue(QString::number(st->id())));
     obj.insert("name", QJsonValue(QString(st->name().c_str())));
@@ -236,6 +237,15 @@ QJsonObject SimpleTaskManager::STToJSON(SimpleTask *st)
     obj.insert("timeDue", QJsonValue(QString::number(st->timeDue())));
     obj.insert("priority", QJsonValue(QString::number(st->priority())));
     obj.insert("level", QJsonValue(QString::number(st->level())));
+
+    vst_t *sts = st->getSubTasks();
+    for(auto i = sts->begin(); i != sts->end(); ++i)
+    {
+        SimpleTask *sub = i->second;
+        QJsonObject obj2 = STToJSON(sub);
+        subTasks.append(QJsonValue(obj2));
+    }
+    obj.insert("subTasks", QJsonValue(subTasks));
 
     return obj;
 }
@@ -296,16 +306,6 @@ SimpleTask *SimpleTaskManager::STFromJSON(QJsonObject obj, SimpleTask *father)
     _st->_timeDue = obj.value("timeDue").toString().toULongLong();
     _st->_priority = obj.value("priority").toString().toInt();
     _st->_level = obj.value("level").toString().toUInt();
-
-    //_st->setName(obj.value("name").toString().toUtf8().constData());
-    //_st->setDescription(obj.value("description").toString().toUtf8().constData());
-    //_st->setId(obj.value("id").toString().toUInt());
-    //_st->setDone(IntToSTDoneType(obj.value("done").toString().toInt()));
-    //_st->setTimeCreation(obj.value("timeCreation").toString().toULongLong());
-    //_st->setTimeDone(obj.value("timeDone").toString().toULongLong());
-    //_st->setTimeDue(obj.value("timeDue").toString().toULongLong());
-    //_st->setPriority(obj.value("priority").toString().toInt());
-    //_st->setLevel(obj.value("level").toString().toUInt());
 
     QJsonArray subTasks = obj.value("subTasks").toArray();
 
