@@ -88,12 +88,14 @@ void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)
     if(f.exists())
         f.remove();
 
-    _stm->removeTask(t);
+    _stm->removeTask(t, true);
 
     ui->listTasks->takeItem(ui->listTasks->row(tw->myQLWI()));
 
     delete tw;
     delete t;
+
+    this->update();
 }
 
 void SimpleTaskListWindow::setCurrent(int row)

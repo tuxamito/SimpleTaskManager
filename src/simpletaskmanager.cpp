@@ -143,13 +143,17 @@ SimpleTask *SimpleTaskManager::task(uint32_t id)
     return NULL;
 }
 
-void SimpleTaskManager::removeTask(SimpleTask *task)
+void SimpleTaskManager::removeTask(SimpleTask *task, bool save)
 {
+    for (auto i = task->getSubTasks()->begin(); i != task->getSubTasks()->end(); ++i)
+    {
+        SimpleTask *t = i->second;
+        this->removeTask(t, false);
+    }
+
     if(task->manager() != NULL)
     {
-        vst_t::iterator elem;
-
-        elem = _vst.find(task->id());
+        auto elem = _vst.find(task->id());
         if(elem != _vst.end())
         {
             _vst.erase(elem);
@@ -158,16 +162,13 @@ void SimpleTaskManager::removeTask(SimpleTask *task)
     }
     else if (task->father() != NULL)
     {
-        for (auto i = task->getSubTasks()->begin(); i != task->getSubTasks()->end(); ++i)
-        {
-            SimpleTask *t = i->second;
-            this->removeTask(t);
-        }
-
-        auto  it = task->father()->_subTasks.find(task->id());
-        task->father()->_subTasks.erase(it);
-
         _vui.erase(task->id());
+        if(save)
+        {
+            auto elem = task->_father->_subTasks.find(task->id());
+            task->_father->_subTasks.erase(elem);
+            task->father()->setModified();
+        }
     }
 }
 
@@ -222,7 +223,6 @@ lst_t SimpleTaskManager::getTaskList()
 }
 
 //FROM Operations
-
 QJsonObject SimpleTaskManager::STToJSON(SimpleTask *st)
 {
     QJsonObject obj;
