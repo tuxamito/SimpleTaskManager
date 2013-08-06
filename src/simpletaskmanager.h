@@ -19,7 +19,7 @@ public:
 
     uint32_t addTask(SimpleTask *task);
     SimpleTask *task(uint32_t id);
-    void removeTask(uint32_t id);
+    void removeTask(SimpleTask *task);
     void saveAll();
 
     void saveTask(SimpleTask *task);

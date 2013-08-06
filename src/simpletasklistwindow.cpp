@@ -88,7 +88,7 @@ void SimpleTaskListWindow::deleteTask(simpleTaskListWidget* tw)
     if(f.exists())
         f.remove();
 
-    _stm->removeTask(t->id());
+    _stm->removeTask(t);
 
     ui->listTasks->takeItem(ui->listTasks->row(tw->myQLWI()));
 

@@ -143,15 +143,31 @@ SimpleTask *SimpleTaskManager::task(uint32_t id)
     return NULL;
 }
 
-void SimpleTaskManager::removeTask(uint32_t id)
+void SimpleTaskManager::removeTask(SimpleTask *task)
 {
-    vst_t::iterator elem;
-
-    elem = _vst.find(id);
-    if(elem != _vst.end())
+    if(task->manager() != NULL)
     {
-        _vst.erase(elem);
-        _vui.erase(id);
+        vst_t::iterator elem;
+
+        elem = _vst.find(task->id());
+        if(elem != _vst.end())
+        {
+            _vst.erase(elem);
+            _vui.erase(task->id());
+        }
+    }
+    else if (task->father() != NULL)
+    {
+        for (auto i = task->getSubTasks()->begin(); i != task->getSubTasks()->end(); ++i)
+        {
+            SimpleTask *t = i->second;
+            this->removeTask(t);
+        }
+
+        auto  it = task->father()->_subTasks.find(task->id());
+        task->father()->_subTasks.erase(it);
+
+        _vui.erase(task->id());
     }
 }
 
