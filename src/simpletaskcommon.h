@@ -2,6 +2,7 @@
 #define SIMPLETASKCOMMON_H
 
 #include <cstdint>
+#include <string>
 #include <unordered_map>
 #include <list>
 

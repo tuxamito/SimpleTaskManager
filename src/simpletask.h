@@ -1,9 +1,6 @@
 #ifndef SIMPLETASK_H
 #define SIMPLETASK_H
 
-#include <string>
-#include <ctime>
-
 #include "simpletaskcommon.h"
 
 class SimpleTask
