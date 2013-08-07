@@ -15,6 +15,7 @@ SimpleTask::SimpleTask()
     _modified = false;
     _timeCreation = 0;
     _timeDone = 0;
+    _timeStart = 0;
     _timeDue = 0;
     _priority = 0;
     _level = 0;
@@ -130,6 +131,17 @@ void SimpleTask::setTimeDone(time_t timeDone)
 time_t SimpleTask::timeDone()
 {
     return _timeDone;
+}
+
+void SimpleTask::setTimeStart(time_t timeStart)
+{
+    _timeDone = timeStart;
+    this->setModified();
+}
+
+time_t SimpleTask::timeStart()
+{
+    return _timeStart;
 }
 
 void SimpleTask::setTimeDue(time_t timeDue)

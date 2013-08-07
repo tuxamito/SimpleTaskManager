@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QString>
+#include <QDateTime>
 
 #include "simpletask.h"
 
@@ -27,6 +28,8 @@ private slots:
     void cancel();
     void loadInfo();
     void changeTaskDone(bool done);
+    void changeStartEnable(bool enable);
+    void changedCreation(QDateTime newdatetime);
 
 signals:
     void closeInfo();

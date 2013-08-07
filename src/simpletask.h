@@ -33,6 +33,9 @@ public:
     void setTimeDone(time_t timeDone);
     time_t timeDone();
 
+    void setTimeStart(time_t timeStart);
+    time_t timeStart();
+
     void setTimeDue(time_t timeDue);
     time_t timeDue();
 
@@ -80,6 +83,7 @@ private:
 
     time_t _timeCreation;
     time_t _timeDone;
+    time_t _timeStart;
     time_t _timeDue;
 
     int _priority;

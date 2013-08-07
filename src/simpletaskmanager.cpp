@@ -222,7 +222,6 @@ lst_t SimpleTaskManager::getTaskList()
     return list;
 }
 
-//FROM Operations
 QJsonObject SimpleTaskManager::STToJSON(SimpleTask *st)
 {
     QJsonObject obj;
@@ -234,6 +233,7 @@ QJsonObject SimpleTaskManager::STToJSON(SimpleTask *st)
     obj.insert("done", QJsonValue(QString::number(STDoneTypeToInt(st->done()))));
     obj.insert("timeCreation", QJsonValue(QString::number(st->timeCreation())));
     obj.insert("timeDone", QJsonValue(QString::number(st->timeDone())));
+    obj.insert("timeStart", QJsonValue(QString::number(st->timeStart())));
     obj.insert("timeDue", QJsonValue(QString::number(st->timeDue())));
     obj.insert("priority", QJsonValue(QString::number(st->priority())));
     obj.insert("level", QJsonValue(QString::number(st->level())));
@@ -303,6 +303,7 @@ SimpleTask *SimpleTaskManager::STFromJSON(QJsonObject obj, SimpleTask *father)
     _st->_done = IntToSTDoneType(obj.value("done").toString().toInt());
     _st->_timeCreation = obj.value("timeCreation").toString().toULongLong();
     _st->_timeDone = obj.value("timeDone").toString().toULongLong();
+    _st->_timeStart = obj.value("timeStart").toString().toULongLong();
     _st->_timeDue = obj.value("timeDue").toString().toULongLong();
     _st->_priority = obj.value("priority").toString().toInt();
     _st->_level = obj.value("level").toString().toUInt();
@@ -313,7 +314,6 @@ SimpleTask *SimpleTaskManager::STFromJSON(QJsonObject obj, SimpleTask *father)
     {
         QJsonValue subTask = *i;
         SimpleTask *_subTask = STFromJSON(subTask.toObject(), _st);
-        //check check check
         _st->addSubTask(_subTask);
     }
 

@@ -92,24 +92,31 @@
      <item row="3" column="1">
       <widget class="QDateTimeEdit" name="dateTimeDone"/>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Due:</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="6" column="1">
       <widget class="QDateTimeEdit" name="dateTimeDue"/>
      </item>
-     <item row="6" column="0">
+     <item row="8" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Priority:</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelDebug">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
       <widget class="QSpinBox" name="spinBoxPriority">
        <property name="minimum">
         <number>0</number>
@@ -119,10 +126,13 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelDebug">
+     <item row="5" column="1">
+      <widget class="QDateTimeEdit" name="dateTimeStart"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="checkStart">
        <property name="text">
-        <string/>
+        <string>Start:</string>
        </property>
       </widget>
      </item>
@@ -236,10 +246,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>checkStart</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>SimpleTaskInfoWidget</receiver>
+   <slot>changeStartEnable(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>168</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dateTimeCreation</sender>
+   <signal>dateTimeChanged(QDateTime)</signal>
+   <receiver>SimpleTaskInfoWidget</receiver>
+   <slot>changedCreation(QDateTime)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>168</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>accept()</slot>
   <slot>cancel()</slot>
   <slot>changeTaskDone(bool)</slot>
+  <slot>changeStartEnable(bool)</slot>
+  <slot>changedCreation(QDateTime)</slot>
  </slots>
 </ui>
