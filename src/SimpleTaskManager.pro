@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     simpletaskinfowidget.cpp \
     simpletaskaddsubtaskwindow.cpp \
     thememanager.cpp \
-    simpletheme.cpp
+    simpletheme.cpp \
+    priorityindicator.cpp
 
 HEADERS  += mainscreen.h \
     simpletask.h \
@@ -40,7 +41,8 @@ HEADERS  += mainscreen.h \
     simpletaskaddsubtaskwindow.h \
     simpletaskcommon.h \
     thememanager.h \
-    simpletheme.h
+    simpletheme.h \
+    priorityindicator.h
 
 FORMS    += mainscreen.ui \
     simpletasklistwidget.ui \
@@ -49,7 +51,8 @@ FORMS    += mainscreen.ui \
     simpletaskinfowindow.ui \
     simpletasklistwidgetmenu.ui \
     simpletaskinfowidget.ui \
-    simpletaskaddsubtaskwindow.ui
+    simpletaskaddsubtaskwindow.ui \
+    priorityindicator.ui
 
 CONFIG += mobility
 MOBILITY = 
