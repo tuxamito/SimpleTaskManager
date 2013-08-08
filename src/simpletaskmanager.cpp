@@ -132,9 +132,7 @@ uint32_t SimpleTaskManager::addTask(SimpleTask *task)
 
 SimpleTask *SimpleTaskManager::task(uint32_t id)
 {
-    vst_t::iterator elem;
-
-    elem = _vst.find(id);
+    auto elem = _vst.find(id);
     if(elem != _vst.end())
     {
         return (*elem).second;
