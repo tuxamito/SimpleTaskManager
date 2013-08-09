@@ -37,7 +37,6 @@ signals:
 
 private:
     Ui::SimpleTaskInfoWidget *ui;
-
     SimpleTask *_st;
 };
 

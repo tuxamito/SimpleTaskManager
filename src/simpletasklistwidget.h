@@ -10,6 +10,7 @@
 #include <QString>
 
 #include "simpletask.h"
+#include "priorityindicator.h"
 
 namespace Ui {
 class simpleTaskListWidget;
@@ -57,6 +58,7 @@ private:
 
     SimpleTask *_task;
     QListWidgetItem *_qlwi;
+    PriorityIndicator *_priorityW;
 
     unsigned int _subTaskLevel;
 

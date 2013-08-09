@@ -1,8 +1,6 @@
 #include "simpletasklistwidget.h"
 #include "ui_simpletasklistwidget.h"
 
-#include "priorityindicator.h"
-
 #include <QMenu>
 #include <QDebug>
 #include <QGestureEvent>
@@ -41,14 +39,15 @@ simpleTaskListWidget::simpleTaskListWidget(QListWidgetItem *qlwi, QWidget *paren
     ui->buttonExpand->setIconSize(iSize);
     ui->buttonDelete->setIconSize(iSize);
 
-    PriorityIndicator *priorityW = new PriorityIndicator(this);
-    ui->horizontalLayout_2->addWidget(priorityW);
+    _priorityW = new PriorityIndicator(this);
+    ui->layoutPriority->addWidget(_priorityW);
 
     this->redraw();
 }
 
 simpleTaskListWidget::~simpleTaskListWidget()
 {
+    delete _priorityW;
     delete ui;
 }
 
@@ -160,6 +159,8 @@ void simpleTaskListWidget::redraw()
         ui->buttonExpand->setEnabled(!_task->getSubTasks()->empty());
 
         ui->spacerSubTask->changeSize(_task->level() * 20, 5);
+
+        _priorityW->setPriority(_task->priority()*10);
     }
     else
     {
